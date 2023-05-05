@@ -1,0 +1,12 @@
+@import '../../../variables.scss';
+
+.wrapper {
+  border-radius: 10px;
+  background-color: white;
+  width: 50%;
+  flex-grow: 1;
+}
+
+.title {
+  color: $blue-dark;
+}
