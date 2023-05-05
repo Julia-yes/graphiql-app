@@ -5,6 +5,18 @@
   background-color: white;
   width: 50%;
   flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.titleArea {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+  padding: 10px;
+  height: 60px;
 }
 
 .title {

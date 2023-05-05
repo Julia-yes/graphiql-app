@@ -1,0 +1,23 @@
+@import '../../../../variables.scss';
+
+.button {
+  padding: 5px;
+  background-color: $pink;
+  color: white;
+  border-radius: 10px;
+  border-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.data {
+  border: 1px solid black;
+  padding: 10px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+}
