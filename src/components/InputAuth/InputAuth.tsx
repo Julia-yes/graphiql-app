@@ -15,17 +15,15 @@ export const InputAuth = ({ type, value, onChange }: Props) => {
   }
 
   return (
-    <div>
-      <input
-        required={true}
-        pattern={passPattern}
-        minLength={8}
-        type={type}
-        className={styles.input}
-        value={value}
-        onChange={onChange}
-        placeholder={`type ${type}`}
-      />
-    </div>
+    <input
+      required={true}
+      pattern={passPattern}
+      minLength={8}
+      type={type}
+      className={styles.input}
+      value={value}
+      onChange={onChange}
+      placeholder={`type ${type}`}
+    />
   );
 };

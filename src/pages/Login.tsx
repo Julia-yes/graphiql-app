@@ -14,7 +14,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const toastError = () => toast.error('login error');
+  const toastError = (err: Error) => toast.error(err.message);
 
   useEffect(() => {
     if (user) {
@@ -27,13 +27,13 @@ export const Login = () => {
     try {
       await logInWithEmailAndPassword(email, password);
     } catch (err) {
-      toastError();
+      toastError(err as Error);
     }
   };
 
   return (
     <div className={styles.container}>
-      {loading && <h2>loading...</h2>}
+      {/* {loading && <div className={styles.loading}>loading...</div>} */}
       <div className={styles.header}>
         <h2 className={styles.h2}>Sign in</h2>
         <NavLink className={`${styles.headLink} ${styles.link}`} to='/register'>

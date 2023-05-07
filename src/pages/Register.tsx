@@ -13,7 +13,7 @@ export const Register = () => {
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const toastError = () => toast.error('login error');
+  const toastError = (err: Error) => toast.error(err.message);
 
   useEffect(() => {
     if (user) {
@@ -26,7 +26,7 @@ export const Register = () => {
     try {
       await registerWithEmailAndPassword(email, password);
     } catch (err) {
-      toastError();
+      toastError(err as Error);
     }
   };
 

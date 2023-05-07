@@ -41,9 +41,8 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
 const sendPasswordReset = async (email: string) => {
   try {
     await sendPasswordResetEmail(auth, email);
-    alert('Password reset link sent!');
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 

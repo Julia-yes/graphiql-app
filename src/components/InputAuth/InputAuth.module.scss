@@ -2,6 +2,7 @@
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border: none;
+  display: block;
   outline: transparent;
   background-color: #f3f3f4;
   margin-bottom: 1rem;
@@ -15,7 +16,4 @@
     outline: 1px solid #bdbdbd;
     background-color: transparent;
   }
-  // &:invalid {
-  //   border: 1px solid red;
-  // }
 }
