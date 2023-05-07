@@ -1,19 +1,22 @@
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 
-import { auth, logout } from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 
 import styles from './Welcome.module.scss';
 
 export const Welcome = () => {
   const [user, loading, error] = useAuthState(auth);
+  document.title = 'Welcome';
 
   return (
     <div className={styles.welc}>
       <h1 className={styles.h1}>Welcome, GraphQL enjoyers</h1>
-      <p>This site will help you to expolre this tool</p>
+      <p className={styles.mainDesc}>
+        Whether you want a simple GraphiQL IDE instance for your server, or a more advanced web or
+        desktop GraphQL IDE experience for your framework or plugin, or you want to build an IDE
+        extension or plugin, you&apos;ve come to the right place!
+      </p>
       <div className={styles.devs}>
         <div>
           <h3>Developer 1</h3>
@@ -34,9 +37,6 @@ export const Welcome = () => {
           <NavLink className={styles.linkBottom} to='/graphiQL'>
             GraphQL App
           </NavLink>
-          {/* <button style={{ display: 'block' }} onClick={logout}>
-            logout
-          </button> */}
         </>
       ) : (
         <>

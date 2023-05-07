@@ -18,7 +18,7 @@ export const Header = () => {
           {user ? (
             <>
               <NavLink className={styles.link} to='/graphiQL'>
-                GraphQL App
+                Go to Main Page
               </NavLink>
               <button className={styles.logout} onClick={logout}>
                 Logout

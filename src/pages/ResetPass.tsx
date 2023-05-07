@@ -14,6 +14,7 @@ export const ResetPass = () => {
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
   const toastSuccess = () => toast('Message sent');
+  document.title = 'Reset';
 
   useEffect(() => {
     if (loading) {

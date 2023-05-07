@@ -14,6 +14,7 @@ export const Register = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
+  document.title = 'Sign Up';
 
   useEffect(() => {
     if (user) {
