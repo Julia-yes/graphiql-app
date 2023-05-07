@@ -1,3 +1,62 @@
-.auth {
-  color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+
+.container {
+  width: max-content;
+  margin: 20vh auto;
+  font-family: Jost, 'Segoe UI', sans-serif;
+}
+
+.h2 {
+  // margin: 2rem 0 1rem;
+  line-height: 2rem;
+}
+
+.button {
+  font-family: Jost, 'Segoe UI', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  color: white;
+  background-color: #ea4c89;
+  transition: 0.2s;
+  font-size: 1rem;
+  &:hover {
+    background-color: #f082ac;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #635bff;
+  transition: 0.2s;
+  &:hover {
+    color: #0a2540;
+  }
+}
+
+.linkReset {
+  margin: 1rem 0;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+}
+
+.headLink {
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 2rem;
+  }
 }

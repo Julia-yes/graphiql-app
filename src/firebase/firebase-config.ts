@@ -7,10 +7,4 @@ const config = {
   appId: '1:315321657404:web:437d37685d33e5139a3b39',
 };
 
-export function getFirebaseConfig() {
-  if (!config || !config.apiKey) {
-    throw new Error('No Firebase configuration object provided');
-  } else {
-    return config;
-  }
-}
+export default config;

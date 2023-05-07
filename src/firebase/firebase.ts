@@ -9,9 +9,9 @@ import {
 } from 'firebase/auth';
 import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
 
-import { getFirebaseConfig } from './firebase';
+import config from './firebase-config';
 
-const app = initializeApp(getFirebaseConfig());
+const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -19,7 +19,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 
@@ -34,7 +34,7 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
     });
     sendEmailVerification(user);
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 
