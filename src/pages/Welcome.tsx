@@ -12,19 +12,42 @@ export const Welcome = () => {
 
   return (
     <div className={styles.welc}>
-      <div>Welcome</div>
+      <h1 className={styles.h1}>Welcome, GraphQL enjoyers</h1>
+      <p>This site will help you to expolre this tool</p>
+      <div className={styles.devs}>
+        <div>
+          <h3>Developer 1</h3>
+          <p>Realy strong</p>
+        </div>
+        <div>
+          <h3>Developer 2</h3>
+          <p>Realy smart</p>
+        </div>
+        <div>
+          <h3>Developer 3</h3>
+          <p>Realy tricky</p>
+        </div>
+      </div>
+      <p>RS-School-React is a really nice place to be</p>
       {user ? (
         <>
-          <NavLink to='/graphiQL'>Graphi</NavLink>
-          <button style={{ display: 'block' }} onClick={logout}>
+          <NavLink className={styles.linkBottom} to='/graphiQL'>
+            GraphQL App
+          </NavLink>
+          {/* <button style={{ display: 'block' }} onClick={logout}>
             logout
-          </button>
+          </button> */}
         </>
       ) : (
         <>
-          <NavLink to='/login'>Sign In</NavLink>
-          <br />
-          <NavLink to='/register'>Sign Up</NavLink>
+          <div className={styles.bottomBtns}>
+            <NavLink className={styles.linkBottom} to='/login'>
+              Sign In
+            </NavLink>
+            <NavLink className={styles.linkBottom} to='/register'>
+              Sign Up
+            </NavLink>
+          </div>
         </>
       )}
     </div>

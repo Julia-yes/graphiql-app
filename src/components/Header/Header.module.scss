@@ -1,7 +1,112 @@
 @import '../../variables.scss';
 
-.head {
+.header {
   color: white;
   background-color: $blue-dark;
-  padding: 10px;
+  padding: 0.5rem 0;
+}
+
+.wrapper {
+  width: max(300px, 60%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.2s;
+  &:hover {
+    color: #aaa;
+  }
+}
+
+.logoLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.langToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  // margin-left: 2rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  // &::before {
+  //   content: 'EN';
+  //   position: relative;
+  //   left: -30px;
+  //   top: 4px;
+  // }
+  // &::after {
+  //   display: inline-block;
+  //   content: 'RU';
+  //   position: relative;
+  //   right: -36px;
+  //   top: 4px;
+  // }
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ea4c89;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
