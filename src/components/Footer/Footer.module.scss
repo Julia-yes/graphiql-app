@@ -5,3 +5,30 @@
   background-color: $blue-dark;
   padding: 10px;
 }
+
+.wrapper {
+  width: max(300px, 60%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rsLogo {
+  height: 1.5rem;
+  filter: invert(1);
+  display: block;
+}
+
+.credits {
+  display: flex;
+  gap: 1rem;
+}
+
+.credits a {
+  color: #fff;
+  transition: 0.2s;
+  &:hover {
+    color: #aaa;
+  }
+}

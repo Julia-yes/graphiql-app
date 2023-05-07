@@ -1,5 +1,5 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { auth, logout } from '../../firebase/firebase';
 
@@ -20,7 +20,9 @@ export const Header = () => {
               <NavLink className={styles.link} to='/graphiQL'>
                 GraphQL App
               </NavLink>
-              <button onClick={logout}>Logout</button>
+              <button className={styles.logout} onClick={logout}>
+                Logout
+              </button>
             </>
           ) : (
             <>
