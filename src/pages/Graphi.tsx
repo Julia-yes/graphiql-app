@@ -11,8 +11,6 @@ import { auth } from '../firebase/firebase';
 import styles from './Graphi.module.scss';
 
 export const Graphi = () => {
-  /*
-  для редиректа невошедших
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
@@ -20,7 +18,7 @@ export const Graphi = () => {
     if (!user) {
       navigate('/');
     }
-  }, [user, navigate]); */
+  }, [user, navigate]);
 
   return (
     <div className={styles.wrapper}>
