@@ -42,6 +42,9 @@ export const Register = () => {
       <form onSubmit={(e) => register(e)}>
         <InputAuth type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
         <InputAuth type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <p className={styles.hint}>
+          minimum 8 symbols, at least one letter, one digit, one special character
+        </p>
         <button
           className={styles.button}
           onClick={() => registerWithEmailAndPassword(email, password)}

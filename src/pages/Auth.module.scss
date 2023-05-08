@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .container {
-  width: max-content;
+  width: min-content;
   margin: 20vh auto;
 }
 
@@ -59,6 +59,17 @@
   background-color: white;
   font-size: 3rem;
   text-align: center;
+}
+
+.hint {
+  width: 100%;
+  color: #777;
+  // background-color: #c9fff0;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {

@@ -20,15 +20,15 @@ export const Welcome = () => {
       <div className={styles.devs}>
         <div>
           <h3>Developer 1</h3>
-          <p>Realy strong</p>
+          <p>Really strong</p>
         </div>
         <div>
           <h3>Developer 2</h3>
-          <p>Realy smart</p>
+          <p>Really smart</p>
         </div>
         <div>
           <h3>Developer 3</h3>
-          <p>Realy tricky</p>
+          <p>Really tricky</p>
         </div>
       </div>
       <p>RS-School-React is a really nice place to be</p>
