@@ -5,43 +5,52 @@ import { auth, logout } from '../../firebase/firebase';
 
 import styles from './Header.module.scss';
 
+import { Paths } from '../../enums/Paths';
+import { UINames } from '../../enums/UINames';
+import { Inputs } from '../../enums/Inputs';
+
 export const Header = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const TO_MAIN = 'Go to Main Page';
+  const RLX = 'rlx';
+  const RU = 'RU';
+  const EN = 'EN';
+
+  const [user] = useAuthState(auth);
 
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <NavLink className={styles.logoLink} to='/'>
-          <h2>rlx</h2>
+        <NavLink className={styles.logoLink} to={Paths.ROOT}>
+          <h2>{RLX}</h2>
         </NavLink>
         <div className={styles.menu}>
           {user ? (
             <>
-              <NavLink className={styles.link} to='/graphiQL'>
-                Go to Main Page
+              <NavLink className={styles.link} to={Paths.GRAPH}>
+                {TO_MAIN}
               </NavLink>
               <button className={styles.logout} onClick={logout}>
-                Logout
+                {UINames.LOGUOT}
               </button>
             </>
           ) : (
             <>
-              <NavLink className={styles.link} to='/login'>
-                Sign In
+              <NavLink className={styles.link} to={Paths.LOGIN}>
+                {UINames.SIGN_IN}
               </NavLink>
-              <NavLink className={styles.link} to='/register'>
-                Sign Up
+              <NavLink className={styles.link} to={Paths.REGISTER}>
+                {UINames.SIGN_UP}
               </NavLink>
             </>
           )}
 
           <div className={styles.langToggle}>
-            EN
+            {EN}
             <label className={styles.switch}>
-              <input type='checkbox' />
+              <input type={Inputs.CHECKBOX} />
               <span className={`${styles.slider} ${styles.round}`}></span>
             </label>
-            RU
+            {RU}
           </div>
         </div>
       </div>

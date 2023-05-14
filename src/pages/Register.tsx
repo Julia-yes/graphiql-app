@@ -8,17 +8,24 @@ import { InputAuth } from '../components/index';
 
 import styles from './Auth.module.scss';
 
+import { Titles } from '../enums/Titles';
+import { Paths } from '../enums/Paths';
+import { UINames } from '../enums/UINames';
+import { Inputs } from '../enums/Inputs';
+
 export const Register = () => {
+  const PASS_HINT = 'minimum 8 symbols, at least one letter, one digit, one special character';
+
+  document.title = Titles.REGISTER;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
-  document.title = 'Sign Up';
 
   useEffect(() => {
     if (user) {
-      navigate('/graphiQL');
+      navigate(Paths.GRAPH);
     }
   }, [user, navigate]);
 
@@ -34,22 +41,24 @@ export const Register = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.h2}>Sign Up</h2>
-        <NavLink className={`${styles.headLink} ${styles.link}`} to='/login'>
-          Sign In
+        <h2 className={styles.h2}>{UINames.SIGN_UP}</h2>
+        <NavLink className={`${styles.headLink} ${styles.link}`} to={Paths.LOGIN}>
+          {UINames.SIGN_IN}
         </NavLink>
       </div>
       <form onSubmit={(e) => register(e)}>
-        <InputAuth type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <InputAuth type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <p className={styles.hint}>
-          minimum 8 symbols, at least one letter, one digit, one special character
-        </p>
+        <InputAuth type={Inputs.EMAIL} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputAuth
+          type={Inputs.PASS}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className={styles.hint}>{PASS_HINT}</p>
         <button
           className={styles.button}
           onClick={() => registerWithEmailAndPassword(email, password)}
         >
-          Register
+          {UINames.REGISTER}
         </button>
       </form>
       <ToastContainer />

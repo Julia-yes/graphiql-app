@@ -10,13 +10,17 @@ import { auth } from '../firebase/firebase';
 
 import styles from './Graphi.module.scss';
 
+import { Paths } from '../enums/Paths';
+import { Titles } from '../enums/Titles';
+
 export const Graphi = () => {
-  const [user, loading, error] = useAuthState(auth);
+  document.title = Titles.GRAPH;
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
-      navigate('/');
+      navigate(Paths.ROOT);
     }
   }, [user, navigate]);
 

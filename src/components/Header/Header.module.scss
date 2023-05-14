@@ -11,12 +11,16 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+
 }
 
 .menu {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
+
 }
 
 .link {
@@ -53,19 +57,6 @@
   display: inline-block;
   width: 48px;
   height: 28px;
-  // &::before {
-  //   content: 'EN';
-  //   position: relative;
-  //   left: -30px;
-  //   top: 4px;
-  // }
-  // &::after {
-  //   display: inline-block;
-  //   content: 'RU';
-  //   position: relative;
-  //   right: -36px;
-  //   top: 4px;
-  // }
 }
 
 .switch input {
@@ -110,11 +101,17 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+@media (max-width: 360px) {
+  .menu {
+    gap: 1rem;
+  }
 }

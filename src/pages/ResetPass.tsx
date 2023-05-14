@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { auth, sendPasswordReset } from '../firebase/firebase';
@@ -8,22 +8,30 @@ import { InputAuth } from '../components/index';
 
 import styles from './Auth.module.scss';
 
+import { Titles } from '../enums/Titles';
+import { Paths } from '../enums/Paths';
+import { Inputs } from '../enums/Inputs';
+
 export const ResetPass = () => {
+  const RESET_PASS = 'Reset password';
+  const SEND_RESET = 'Send reset email';
+  const MESSAGE_SENT = 'Message sent';
+
+  document.title = Titles.RESET;
   const [email, setEmail] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
-  const toastSuccess = () => toast('Message sent');
-  document.title = 'Reset';
+  const toastSuccess = () => toast(MESSAGE_SENT);
 
   useEffect(() => {
     if (loading) {
       return;
     }
     if (user) {
-      navigate('/graphiQL');
+      navigate(Paths.GRAPH);
     }
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   const reset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,11 +46,11 @@ export const ResetPass = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.h2}>Reset password</h2>
+        <h2 className={styles.h2}>{RESET_PASS}</h2>
       </div>
       <form onSubmit={(e) => reset(e)}>
-        <InputAuth type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <button className={styles.button}>Send reset email</button>
+        <InputAuth type={Inputs.EMAIL} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <button className={styles.button}>{SEND_RESET}</button>
       </form>
       <ToastContainer />
     </div>

@@ -2,6 +2,8 @@ import React from 'react';
 
 import styles from './InputAuth.module.scss';
 
+import { Inputs } from '../../enums/Inputs';
+
 type Props = {
   type: 'email' | 'password';
   value: string;
@@ -9,9 +11,11 @@ type Props = {
 };
 
 export const InputAuth = ({ type, value, onChange }: Props) => {
+  const PATTERN = '(?=.*?[0-9])(?=.*?[A-Za-z])(?=.*[^0-9A-Za-z]).+';
+
   let passPattern = undefined;
-  if (type === 'password') {
-    passPattern = '(?=.*?[0-9])(?=.*?[A-Za-z])(?=.*[^0-9A-Za-z]).+';
+  if (type === Inputs.PASS) {
+    passPattern = PATTERN;
   }
 
   return (

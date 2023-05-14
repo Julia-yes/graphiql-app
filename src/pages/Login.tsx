@@ -9,17 +9,22 @@ import { InputAuth } from '../components/index';
 
 import styles from './Auth.module.scss';
 
+import { Paths } from '../enums/Paths';
+import { Titles } from '../enums/Titles';
+import { Inputs } from '../enums/Inputs';
+import { UINames } from '../enums/UINames';
+
 export const Login = () => {
+  document.title = Titles.LOGIN;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
-  document.title = 'Sign In';
 
   useEffect(() => {
     if (user) {
-      navigate('/graphiQL');
+      navigate(Paths.GRAPH);
     }
   }, [user, loading, navigate]);
 
@@ -34,22 +39,25 @@ export const Login = () => {
 
   return (
     <div className={styles.container}>
-      {/* {loading && <div className={styles.loading}>loading...</div>} */}
       <div className={styles.header}>
         <h2 className={styles.h2}>Sign in</h2>
-        <NavLink className={`${styles.headLink} ${styles.link}`} to='/register'>
-          Sign Up
+        <NavLink className={`${styles.headLink} ${styles.link}`} to={Paths.REGISTER}>
+          {UINames.SIGN_UP}
         </NavLink>
       </div>
       <form onSubmit={(e) => login(e)}>
-        <InputAuth type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <InputAuth type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button className={styles.button} type={'submit'}>
+        <InputAuth type={Inputs.EMAIL} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputAuth
+          type={Inputs.PASS}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className={styles.button} type={Inputs.SUBMIT}>
           Login
         </button>
       </form>
-      <NavLink className={`${styles.linkReset} ${styles.link}`} to='/reset'>
-        Forgot password
+      <NavLink className={`${styles.linkReset} ${styles.link}`} to={Paths.RESET}>
+        {UINames.FORGOT_PASS}
       </NavLink>
       <ToastContainer />
     </div>

@@ -10,18 +10,17 @@
 
 .h1 {
   font-size: calc(1rem + 2vw);
-
 }
 
 .mainDesc {
   margin-top: -0.5rem;
-  margin-bottom: 1rem;
   color: #777;
 }
 
 .devs {
   border: 1px solid #bdbdbd;
   border-radius: 0.5rem;
+  margin-top: 2rem;
   padding: 1rem;
   div {
     margin-bottom: 1rem;
@@ -46,5 +45,11 @@
   transition: 0.2s;
   &:hover {
     background-color: lighten($color: $blue-dark, $amount: 10);
+  }
+}
+
+@media (max-width: 768px) {
+  .welc {
+    margin-top: 1.5rem;
   }
 }
