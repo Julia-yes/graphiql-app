@@ -1,4 +1,5 @@
 import { createContext, memo, PropsWithChildren, useState } from 'react';
+import { FinalViewOFRequest } from '../utils/ParseData';
 
 interface IDataContext {
   query: string | null;
@@ -26,13 +27,7 @@ export const DataContext = createContext<IDataContext>({
   setNewError: () => {},
   rows: 1,
   setNewRows: () => {},
-  request: `query Characters {
-    characters {
-      info {
-        pages
-      }
-    }
-  }`,
+  request: '',
   setNewRequest: () => {},
 });
 
@@ -62,7 +57,11 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
     setRows(value);
   };
 
-  const [request, setRequest] = useState<string>('query DefaultRequst($page: Int) {characters(page: $page) {results {name gender species}}}');
+  const [request, setRequest] = useState<string>(
+    FinalViewOFRequest(
+      'query Test($page: Int) {characters(page: $page) {results {name gender species}}}'
+    )
+  );
   const setNewRequest = (value: string) => {
     setRequest(value);
   };
@@ -81,7 +80,7 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
         rows,
         setNewRows,
         request,
-        setNewRequest
+        setNewRequest,
       }}
     >
       {children}

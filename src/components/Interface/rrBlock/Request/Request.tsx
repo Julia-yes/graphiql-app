@@ -1,48 +1,70 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Editor } from '../../Editor/Editor';
 import stylesCommon from '../RRBlock.module.scss';
 import styles from './Request.module.scss';
 import { DataContext } from '../../../../context/Context';
 import { LoadSource } from '../../../../utils/LoadSource';
 import { ChecksStaples } from '../../../../utils/ChecksStaples';
-import { FinalViewOFRequest, ParseData } from '../../../../utils/ParseData';
+import { FinalViewOFRequest, ParseDataBySymbols } from '../../../../utils/ParseData';
 
 export const Request = () => {
-  const { setNewData, setNewError, rows, request } = useContext(DataContext);
+  console.log('111111');
+  const { setNewData, setNewError, rows, request, error, setNewLoading, setNewRequest } =
+    useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
-  const [line, setLine] = useState('');
 
-  const input = React.useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    SetQueryName(request);
+  }, [request]);
 
   const MakeRequest = async () => {
-    if (input.current) {
-      console.log('2222', input.current?.cols);
-
-      const data = await LoadSource(input?.current.value);
+    const isGoodRequest = await CheckRequest(request);
+    if (isGoodRequest) {
+      setNewLoading(true);
+      const data = await LoadSource(request);
       setNewData(data);
-      CheckRequest(input?.current.value);
+      setNewLoading(false);
     }
   };
 
-  
-
-  const CheckRequest = (data: string) => {
-    const parseResult = ParseData(data);
+  const SetQueryName = (data: string) => {
+    const parseResult = ParseDataBySymbols(data);
+    console.log('!!!!1', parseResult);
+    setNewError('');
+    if (!data) {
+      setNewError('Request is empty, write something.');
+      return;
+    }
     if (parseResult[0] !== 'query') {
       setNewError('Your query must start with word "query".');
+      return;
     }
-    if ((parseResult[0] === 'query' && parseResult[2] === '(') || parseResult[2] === '{') {
+    if (
+      parseResult[0] === 'query' &&
+      (parseResult[2] === '(' || parseResult[2] === '{' || parseResult[2] === '')
+    ) {
       setQueryTitle(parseResult[1]);
+      return;
+    } else {
+      setNewError('Error in your query');
     }
+  };
+
+  const CheckRequest = (data: string) => {
     const error = ChecksStaples(data);
     if (!error) {
       setNewError('problem with staples');
     }
+    return error;
   };
 
-  
+  const DeleteRequest = () => {
+    setNewRequest('');
+  };
 
-  const DeleteRequest = () => {};
+  const EditRequest = () => {
+    setNewRequest(FinalViewOFRequest(request.replace(/[\r\n]+/g, '')));
+  };
 
   const BuildRows = () => {
     let arr = [];
@@ -56,7 +78,7 @@ export const Request = () => {
     <section className={stylesCommon.wrapper}>
       <div className={stylesCommon.titleArea}>
         <h3 className={stylesCommon.title}>Request</h3>
-        <button className={styles.button} onClick={MakeRequest}>
+        <button className={styles.button} disabled={error ? true : false} onClick={MakeRequest}>
           <span className={styles.button__title}>{queryTitle ? queryTitle : 'Run'}</span>
           <span className='material-icons'>arrow_circle_right</span>
         </button>
@@ -64,18 +86,19 @@ export const Request = () => {
       <button onClick={() => DeleteRequest()}>
         <span className={`material-icons ${styles.button__icon}`}>delete</span>
       </button>
-      <button onClick={() => FinalViewOFRequest(request)}>
+      <button onClick={() => EditRequest()}>
         <span className={`material-icons ${styles.button__icon}`}>auto_fix_high</span>
       </button>
       <div className={styles.editorArea}>
         <div className={styles.rows}>
           {BuildRows().map((item) => (
-            <div key={item} className={styles.row}>{item}</div>
+            <div key={item} className={styles.row}>
+              {item}
+            </div>
           ))}
         </div>
         <Editor />
       </div>
-      <textarea defaultValue={line} className={styles.text}></textarea>
     </section>
   );
 };

@@ -12,6 +12,11 @@
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
+
+  &:disabled {
+    background-color: $gray-dark;
+    cursor: auto;
+  }
 }
 
 .data {
