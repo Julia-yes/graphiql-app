@@ -8,7 +8,6 @@ import { ChecksStaples } from '../../../../utils/ChecksStaples';
 import { FinalViewOFRequest, ParseDataBySymbols } from '../../../../utils/ParseData';
 
 export const Request = () => {
-  console.log('111111');
   const { setNewData, setNewError, rows, request, error, setNewLoading, setNewRequest } =
     useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
@@ -29,7 +28,6 @@ export const Request = () => {
 
   const SetQueryName = (data: string) => {
     const parseResult = ParseDataBySymbols(data);
-    console.log('!!!!1', parseResult);
     setNewError('');
     if (!data) {
       setNewError('Request is empty, write something.');

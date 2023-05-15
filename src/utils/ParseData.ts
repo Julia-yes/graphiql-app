@@ -7,7 +7,6 @@ export const ParseData = (data: string) => {
         parsedRequest.push(item);
       }
     });
-  console.log('parse', parsedRequest);
   return parsedRequest;
 };
 

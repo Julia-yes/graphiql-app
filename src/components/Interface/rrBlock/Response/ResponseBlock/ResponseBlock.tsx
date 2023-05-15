@@ -8,10 +8,6 @@ type IProps = {
 export const ResponseBlock = ({ data }: IProps) => {
   const response = FinalViewOFRequest(JSON.stringify(data));
   return (
-    <textarea
-      className={styles.textarea}
-      value={response}
-      onInput={(e) => console.log(e)}
-    ></textarea>
+    <textarea className={styles.textarea} value={response} onInput={(e) => alert(e)}></textarea>
   );
 };
