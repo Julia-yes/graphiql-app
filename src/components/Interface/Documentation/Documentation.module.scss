@@ -2,9 +2,23 @@
 
 .documentation {
   width: 25%;
-  overflow: scroll;
+  position: relative;
 }
 
 .title {
   color: $blue-dark;
+}
+
+.type_list {
+  list-style-type: none;
+}
+
+.field {
+  display: inline-block;
+}
+
+.back_button {
+  position: absolute;
+  right: 15px;
+  top: 5px;
 }

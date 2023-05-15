@@ -9,28 +9,17 @@ import {
   GraphQLEnumType,
 } from 'graphql';
 import { useState, useEffect } from 'react';
+import DocType from '../../../types/DocType';
+import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
-type DocField = {
-  [index: string]: string | null | { name: string; type: string; description: string | null }[];
-  name: string;
-  description: string | null;
-  type: string | null;
-  value: string | null;
-};
-
-type DocType = {
-  name: string;
-  description: string | null;
-  fields: DocField[] | null;
-};
-
 export const Documentation = () => {
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [types, setTypes] = useState<DocType[]>([]);
-  const [selectedType, setSelectedType] = useState<DocType>();
+  const [history, setHistory] = useState<DocType[]>([]);
+  const [selectedType, setSelectedType] = useState<DocType | null>(null);
 
   useEffect(() => {
     async function fetchSchema() {
@@ -50,8 +39,6 @@ export const Documentation = () => {
   useEffect(() => {
     if (schema) {
       const typeMap = schema.getTypeMap();
-
-      console.log(schema);
 
       const typesInMap = Object.keys(typeMap)
         .filter((typeName) => !typeName.startsWith('__'))
@@ -96,25 +83,39 @@ export const Documentation = () => {
     }
   }, [schema]);
 
+  useEffect(() => {
+    if (history.length === 0) {
+      setSelectedType(null);
+    } else {
+      setSelectedType(history[history.length - 1]);
+    }
+  }, [history]);
+
   function handleSelectType(type: DocType) {
-    setSelectedType(type);
+    setHistory([...history, type]);
   }
 
   function handleSelectField(name: string) {
     const regExp = /\[(.*?)\]/;
     const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
-    console.log(typeName);
     const type = types.find((type) => type.name === typeName);
     if (type) {
-      setSelectedType(type);
+      setHistory([...history, type]);
     }
+  }
+
+  function goBackInHistory() {
+    setHistory(history.slice(0, -1));
   }
 
   return (
     <div className={styles.documentation}>
+      <button className={styles.back_button} onClick={() => goBackInHistory()}>
+        назад
+      </button>
       <div className='sidebar'>
         <h2 className={styles.title}>Documentation</h2>
-        <ul>
+        <ul className={styles.type_list}>
           {types.map((type) => (
             <li key={type.name} onClick={() => handleSelectType(type)}>
               <h4>{type.name}</h4>
@@ -129,7 +130,8 @@ export const Documentation = () => {
             {selectedType.description && <p>{selectedType.description}</p>}
             {selectedType.fields?.map((field) => (
               <div key={field.name} onClick={() => handleSelectField(field.type || '')}>
-                <h4>{field.name}</h4>:<span className='code'>{field.type || field.value}</span>
+                <h4 className={styles.field}>{field.name}</h4>:
+                <span className='code'>{field.type || field.value}</span>
                 {field.description && <p>{field.description}</p>}
               </div>
             ))}
