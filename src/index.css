@@ -12,3 +12,9 @@
 .main {
   flex-grow: 1;
 }
+
+body,
+button,
+input {
+  font-family: Jost, 'Segoe UI', sans-serif;
+}

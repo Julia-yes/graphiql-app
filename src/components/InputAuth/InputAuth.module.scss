@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+.input {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  display: block;
+  outline: transparent;
+  min-width: 256px;
+  background-color: $gray-white;
+  margin-bottom: 1rem;
+  transition: 0.2s;
+  font-size: 1rem;
+  &:hover {
+    background-color: transparent;
+    box-shadow: 0 0 0 4px $gray-opacity-10;
+  }
+  &:focus {
+    outline: 1px solid $gray-bd;
+    background-color: transparent;
+  }
+}

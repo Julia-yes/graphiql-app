@@ -1,3 +1,78 @@
-.auth {
-  color: blue;
+@import '../variables.scss';
+
+.container {
+  width: min-content;
+  margin: 20vh auto;
+}
+
+.h2 {
+  line-height: 2rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  color: $white;
+  background-color: $blue-dark;
+  transition: 0.2s;
+  font-size: 1rem;
+  &:hover {
+    background-color: lighten($color: $blue-dark, $amount: 10);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: $blue;
+  transition: 0.2s;
+  &:hover {
+    color: $blue-dark;
+  }
+}
+
+.linkReset {
+  margin: 1rem 0;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+}
+
+.headLink {
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: $white;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.hint {
+  width: 100%;
+  color: $gray-7;
+  border: 1px solid $gray;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 2rem;
+  }
 }
