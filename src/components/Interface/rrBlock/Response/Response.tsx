@@ -10,7 +10,7 @@ export const Response = () => {
       <div className={stylesCommon.titleArea}>
         <h3 className={stylesCommon.title}>Response</h3>
       </div>
-      <div>{error ? error : JSON.stringify(data)}</div>
+      <div>{error ? error : data !== null ? JSON.stringify(data) : 'Make your request'}</div>
     </section>
   );
 };

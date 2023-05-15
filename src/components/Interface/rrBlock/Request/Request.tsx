@@ -3,114 +3,53 @@ import { Editor } from '../../Editor/Editor';
 import stylesCommon from '../RRBlock.module.scss';
 import styles from './Request.module.scss';
 import { DataContext } from '../../../../context/Context';
-import { LoadSource } from '../../../../context/LoadSource';
+import { LoadSource } from '../../../../utils/LoadSource';
+import { ChecksStaples } from '../../../../utils/ChecksStaples';
+import { FinalViewOFRequest, ParseData } from '../../../../utils/ParseData';
 
 export const Request = () => {
-  const { setNewData, setNewError } = useContext(DataContext);
+  const { setNewData, setNewError, rows, request } = useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
-  const [data, setData] = useState('null');
+  const [line, setLine] = useState('');
 
   const input = React.useRef<HTMLTextAreaElement>(null);
+
   const MakeRequest = async () => {
     if (input.current) {
+      console.log('2222', input.current?.cols);
+
       const data = await LoadSource(input?.current.value);
-      console.log('222', typeof input?.current.value);
       setNewData(data);
-      ParseData(input?.current.value);
+      CheckRequest(input?.current.value);
     }
   };
 
-  const ParseData = (data: string) => {
-    const res: string[] = [];
-    const wordsArray = JSON.stringify(data)
-      .match(/[a-zA-Z}${]+/g)
-      ?.forEach((item) => {
-        if (item !== 'n') {
-          res.push(item);
-        }
-      });
+  
 
-    console.log(res);
-    ChecksStaples(data);
+  const CheckRequest = (data: string) => {
+    const parseResult = ParseData(data);
+    if (parseResult[0] !== 'query') {
+      setNewError('Your query must start with word "query".');
+    }
+    if ((parseResult[0] === 'query' && parseResult[2] === '(') || parseResult[2] === '{') {
+      setQueryTitle(parseResult[1]);
+    }
     const error = ChecksStaples(data);
     if (!error) {
       setNewError('problem with staples');
     }
-    console.log('!', error);
-    // setData(res)
   };
 
-  const ChecksStaples = (data: string) => {
-    const staples = JSON.stringify(data).match(/[{}()]+/g);
-    const solo: string[] = [];
-    if (staples) {
-      if (staples[0] === ')' || staples[0] === '}' || staples.length % 2 !== 0) {
-        return false;
-      } else {
-        solo.push(staples[0]);
+  
 
-        const open = (param: string) => {
-          if (!solo.length) {
-            solo.push(param);
-          } else {
-            if (param === '(') {
-              if (solo.at(-1) !== ')') {
-                solo.push(param);
-              } else {
-                return false;
-              }
-            } else {
-              if (solo.at(-1) === '{') {
-                solo.push(param);
-              } else {
-                return false;
-              }
-            }
-          }
-        };
+  const DeleteRequest = () => {};
 
-        const close = (param: string) => {
-          if (!solo.length) {
-            return false;
-          } else {
-            if (param === ')') {
-              if (solo.at(-1) === '(') {
-                solo.pop();
-              } else {
-                return false;
-              }
-            } else {
-              if (solo.at(-1) === '{') {
-                solo.pop();
-              } else {
-                return false;
-              }
-            }
-          }
-        };
-
-        for (let i = 1; i < staples?.length; i++) {
-          if (staples[i] == '(') {
-            open(staples[i]);
-          } else if (staples[i] == ')') {
-            close(staples[i]);
-          } else if (staples[i] == '{') {
-            open(staples[i]);
-          } else if (staples[i] == '}') {
-            close(staples[i]);
-          } else {
-            return false;
-          }
-        }
-      }
-    } else {
-      return null;
+  const BuildRows = () => {
+    let arr = [];
+    for (let i = 1; i <= rows; i++) {
+      arr.push(i);
     }
-    if (solo.length) {
-      return false;
-    } else {
-      return true;
-    }
+    return arr;
   };
 
   return (
@@ -119,11 +58,24 @@ export const Request = () => {
         <h3 className={stylesCommon.title}>Request</h3>
         <button className={styles.button} onClick={MakeRequest}>
           <span className={styles.button__title}>{queryTitle ? queryTitle : 'Run'}</span>
-          <span className={`material-icons ${styles.button__icon}`}>arrow_circle_right</span>
+          <span className='material-icons'>arrow_circle_right</span>
         </button>
       </div>
-      <Editor ref={input} />
-      <div className={styles.data}>{data}</div>
+      <button onClick={() => DeleteRequest()}>
+        <span className={`material-icons ${styles.button__icon}`}>delete</span>
+      </button>
+      <button onClick={() => FinalViewOFRequest(request)}>
+        <span className={`material-icons ${styles.button__icon}`}>auto_fix_high</span>
+      </button>
+      <div className={styles.editorArea}>
+        <div className={styles.rows}>
+          {BuildRows().map((item) => (
+            <div key={item} className={styles.row}>{item}</div>
+          ))}
+        </div>
+        <Editor />
+      </div>
+      <textarea defaultValue={line} className={styles.text}></textarea>
     </section>
   );
 };
