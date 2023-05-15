@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .header {
-  color: white;
+  color: $white;
   background-color: $blue-dark;
   padding: 0.5rem 0;
 }
@@ -12,7 +12,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-
 }
 
 .menu {
@@ -20,15 +19,14 @@
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
-
 }
 
 .link {
-  color: #fff;
+  color: $white;
   text-decoration: none;
   transition: 0.2s;
   &:hover {
-    color: #aaa;
+    color: $gray-a;
   }
 }
 
@@ -41,7 +39,7 @@
 }
 
 .logoLink {
-  color: #fff;
+  color: $white;
   text-decoration: none;
 }
 
@@ -49,7 +47,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  // margin-left: 2rem;
 }
 
 .switch {
@@ -72,7 +69,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #888888;
+  background-color: $gray-7;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -84,17 +81,17 @@
   width: 20px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: $white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: $switch-first;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px $switch-first;
 }
 
 input:checked + .slider:before {
@@ -108,7 +105,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
 
 @media (max-width: 360px) {
   .menu {

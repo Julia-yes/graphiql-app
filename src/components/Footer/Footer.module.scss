@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .footer {
-  color: white;
+  color: $white;
   background-color: $blue-dark;
   padding: 10px;
 }
@@ -28,9 +28,9 @@
 }
 
 .credits a {
-  color: #fff;
+  color: $white;
   transition: 0.2s;
   &:hover {
-    color: #aaa;
+    color: $gray-a;
   }
 }

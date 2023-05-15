@@ -14,11 +14,11 @@
 
 .mainDesc {
   margin-top: -0.5rem;
-  color: #777;
+  color: $gray-7;
 }
 
 .devs {
-  border: 1px solid #bdbdbd;
+  border: 1px solid $gray-bd;
   border-radius: 0.5rem;
   margin-top: 2rem;
   padding: 1rem;
@@ -39,7 +39,7 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  color: #fff;
+  color: $white;
   width: fit-content;
   background-color: $blue-dark;
   transition: 0.2s;
