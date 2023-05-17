@@ -15,7 +15,11 @@ import styles from './Documentation.module.scss';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
-export const Documentation = () => {
+type DocProps = {
+  isDocShowed: boolean;
+};
+
+export const Documentation = ({ isDocShowed }: DocProps) => {
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [types, setTypes] = useState<DocType[]>([]);
   const [history, setHistory] = useState<DocType[]>([]);
@@ -32,7 +36,6 @@ export const Documentation = () => {
       const clientSchema = buildClientSchema(data);
       setSchema(clientSchema);
     }
-
     fetchSchema();
   }, []);
 
@@ -108,21 +111,17 @@ export const Documentation = () => {
     setHistory(history.slice(0, -1));
   }
 
+  let docClasses = styles.documentation;
+  if (isDocShowed) {
+    docClasses += ' ' + styles.documentation_showed;
+  }
+
   return (
-    <div className={styles.documentation}>
+    <div className={docClasses}>
       <button className={styles.back_button} onClick={() => goBackInHistory()}>
         назад
       </button>
-      <div className='sidebar'>
-        <h2 className={styles.title}>Documentation</h2>
-        <ul className={styles.type_list}>
-          {types.map((type) => (
-            <li key={type.name} onClick={() => handleSelectType(type)}>
-              <h4>{type.name}</h4>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h2 className={styles.title}>Documentation</h2>
       <div className='content'>
         {selectedType ? (
           <div>
@@ -137,7 +136,16 @@ export const Documentation = () => {
             ))}
           </div>
         ) : (
-          <p>Select a type from the documentation.</p>
+          <div>
+            <ul className={styles.type_list}>
+              {types.map((type) => (
+                <li key={type.name} onClick={() => handleSelectType(type)}>
+                  <h4>{type.name}</h4>
+                </li>
+              ))}
+            </ul>
+            <p>Select a type from the documentation.</p>
+          </div>
         )}
       </div>
     </div>

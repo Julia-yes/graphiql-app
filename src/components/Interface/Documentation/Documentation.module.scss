@@ -3,6 +3,13 @@
 .documentation {
   width: 25%;
   position: relative;
+  margin-left: -25%;
+
+  transition: all 1s ease;
+}
+
+.documentation_showed {
+  margin-left: 0;
 }
 
 .title {
