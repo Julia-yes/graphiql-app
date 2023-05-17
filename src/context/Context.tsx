@@ -1,40 +1,53 @@
 import { createContext, memo, PropsWithChildren, useEffect, useState } from 'react';
 import { AddTabs } from '../utils/ParseData';
+import { Sections } from '../enums/Sections';
 
 interface IDataContext {
-  query: string | null;
-  setNewValue(value: string): void;
+  variables: string;
+  setNewVariables(value: string): void;
+  headers: string;
+  setNewHeaders(value: string): void;
   data: object | null;
   setNewData(newData: object | null): void;
   loading: boolean;
   setNewLoading(value: boolean): void;
   error: string | null;
   setNewError(value: string): void;
-  rows: number;
-  setNewRows(value: number): void;
   request: string;
   setNewRequest(value: string): void;
+  section: Sections.HEADERS | Sections.VARIABLES;
+  changeSection(value: string): void;
+  sectionState: boolean;
+  changeSectionState(value: boolean): void;
 }
 
 export const DataContext = createContext<IDataContext>({
-  query: '',
-  setNewValue: () => {},
+  variables: '',
+  setNewVariables: () => {},
+  headers: '',
+  setNewHeaders: () => {},
   data: null,
   setNewData: () => {},
   loading: false,
   setNewLoading: () => {},
   error: null,
   setNewError: () => {},
-  rows: 1,
-  setNewRows: () => {},
   request: '',
   setNewRequest: () => {},
+  section: Sections.VARIABLES,
+  changeSection: () => {},
+  sectionState: true,
+  changeSectionState: () => {},
 });
 
 export const DataProvider = memo(({ children }: PropsWithChildren) => {
-  const [query, setQuery] = useState<string | null>(localStorage.getItem('search'));
-  const setNewValue = (value: string) => {
-    setQuery(value);
+  const [variables, setVariables] = useState<string>('');
+  const setNewVariables = (value: string) => {
+    setVariables(value);
+  };
+  const [headers, setHeaders] = useState<string>('');
+  const setNewHeaders = (value: string) => {
+    setHeaders(value);
   };
 
   const [data, setData] = useState<object | null>(null);
@@ -52,11 +65,6 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
     setError(value);
   };
 
-  const [rows, setRows] = useState(5);
-  const setNewRows = (value: number) => {
-    setRows(value);
-  };
-
   const [request, setRequest] = useState<string>(
     AddTabs('query Test($page: Int) {characters(page: $page) {results {name gender species}}}')
   );
@@ -64,32 +72,37 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
     setRequest(value);
   };
 
-  useEffect(() => {
-    setNewLoading(true);
-    checkRows();
-    setNewLoading(false);
-  }, [request]);
+  const [section, changeActiveSection] = useState<Sections.HEADERS | Sections.VARIABLES>(
+    Sections.VARIABLES
+  );
+  const changeSection = (value: Sections.HEADERS | Sections.VARIABLES) => {
+    changeActiveSection(value);
+  };
 
-  const checkRows = () => {
-    const numNewlines = (request.match(/\n/g) || []).length + 1;
-    setNewRows(numNewlines ? numNewlines : 1);
+  const [sectionState, changeActiveSectionState] = useState<boolean>(true);
+  const changeSectionState = (value: boolean) => {
+    changeActiveSectionState(value);
   };
 
   return (
     <DataContext.Provider
       value={{
-        query,
-        setNewValue,
+        variables,
+        setNewVariables,
+        headers,
+        setNewHeaders,
         data,
         setNewData,
         loading,
         setNewLoading,
         error,
         setNewError,
-        rows,
-        setNewRows,
         request,
         setNewRequest,
+        section,
+        changeSection,
+        sectionState,
+        changeSectionState
       }}
     >
       {children}

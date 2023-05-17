@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { Editor } from '../../Editor/Editor';
 import stylesCommon from '../RRBlock.module.scss';
 import styles from './Request.module.scss';
 import { DataContext } from '../../../../context/Context';
@@ -7,9 +6,13 @@ import { LoadSource } from '../../../../utils/LoadSource';
 import { ChecksStaples } from '../../../../utils/ChecksStaples';
 import { AddTabs, ParseDataBySymbols } from '../../../../utils/ParseData';
 import { Button } from '../../../Button/Button';
+import { EditorBlock } from '../../EditorBlock/EditorBlock';
+import { Sections } from '../../../../enums/Sections';
+import { SectionsBlock } from '../SectionsBlock/SectionsBlock';
+import { checkRows } from '../../../../utils/CheckRows';
 
 export const Request = () => {
-  const { setNewData, setNewError, rows, request, error, setNewLoading, setNewRequest } =
+  const { setNewData, setNewError, request, error, setNewLoading, setNewRequest } =
     useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
 
@@ -21,9 +24,14 @@ export const Request = () => {
     const isGoodRequest = await CheckRequest(request);
     if (isGoodRequest) {
       setNewLoading(true);
-      const data = await LoadSource(request);
-      setNewData(data);
-      setNewLoading(false);
+      try {
+        const data = await LoadSource(request);
+        setNewData(data);
+      } catch (error) {
+        setNewError('Invalid request');
+      } finally {
+        setNewLoading(false);
+      }
     }
   };
 
@@ -69,14 +77,6 @@ export const Request = () => {
     setNewRequest(AddTabs(request.replace(/[\r\n]+/g, '')));
   };
 
-  const BuildRows = () => {
-    let arr = [];
-    for (let i = 1; i <= rows; i++) {
-      arr.push(i);
-    }
-    return arr;
-  };
-
   return (
     <section className={stylesCommon.wrapper}>
       <div className={stylesCommon.titleArea}>
@@ -87,20 +87,14 @@ export const Request = () => {
         </button>
       </div>
       <div className={stylesCommon.main}>
-        <div className={styles.editorArea}>
-          <div className={styles.rows}>
-            {BuildRows().map((item) => (
-              <div key={item} className={styles.row}>
-                {item}
-              </div>
-            ))}
-          </div>
-          <Editor />
+        <div className={styles.editorBlock}>
+          <EditorBlock type={Sections.REQUEST} rows={checkRows(request)} />
+          <aside className={styles.buttons}>
+            <Button icon='delete' callback={DeleteRequest} />
+            <Button icon='auto_fix_high' callback={EditRequest} />
+          </aside>
         </div>
-        <aside className={styles.buttons}>
-          <Button icon='delete' callback={DeleteRequest} />
-          <Button icon='auto_fix_high' callback={EditRequest} />
-        </aside>
+        <SectionsBlock />
       </div>
     </section>
   );

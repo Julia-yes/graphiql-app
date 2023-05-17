@@ -8,8 +8,9 @@ export const LoadSource = async (query: string) => {
     },
     body: JSON.stringify({ query }),
   });
+  console.log(response)
   if (!response.ok) {
-    return new Error('Could not load the data from the resourse');
+    throw new Error('Could not load the data from the resourse');
   } else {
     const data = await response.json();
     return data;

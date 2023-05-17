@@ -37,23 +37,18 @@
   height: 200px;
 }
 
-.editorArea {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  flex-grow: 1;
-}
-
-.row {
-  line-height: 20px;
-  color: $gray-dark;
-  font-size: 14px;
-}
-
 .buttons {
   flex-grow: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+
+.editorBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  height: 100%;
 }

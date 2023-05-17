@@ -1,0 +1,47 @@
+@import '../../../../variables.scss';
+
+.wrapper {
+  margin-top: 20px;
+  border-top: 1px solid $gray;
+  flex-grow: 0;
+}
+
+.editorWrapper {
+  height: 100px;
+  box-sizing: border-box;
+}
+
+.buttonsArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  color: $gray-dark;
+
+  &:hover {
+    background-color: $gray;
+  }
+
+  &_active {
+    @extend .button;
+    color: $blue_dark;
+  }
+
+}
+
+
+.buttons {
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  align-items:flex-start;
+  gap: 10px;
+}
