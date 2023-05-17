@@ -21,11 +21,10 @@ export const ParseDataBySymbols = (data: string) => {
 
 export const FinalViewOFResponse = (data: string) => {
   let parsedData = ParseData(data).split(' ');
-  console.log(parsedData);
   let string = parsedData
     .join(' ')
     .replace(/\ \":/g, '": ')
-    .replace(/\  \"/g, ' \"')
+    .replace(/\  \"/g, ' "')
     .replace(/ ",/g, '",\n')
     .replace(/ "}/g, '"\n}')
     .replace(/,{/g, ',\n{')
