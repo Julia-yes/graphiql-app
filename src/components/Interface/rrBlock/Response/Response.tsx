@@ -13,14 +13,17 @@ export const Response = () => {
       <div className={stylesCommon.titleArea}>
         <h3 className={stylesCommon.title}>Response</h3>
       </div>
-      {loading && <Loading type={'spinningBubbles'} color={'#6bc8be'} />}
-      {error ? (
-        <ErrorBlock error={error} />
-      ) : data !== null ? (
-        <ResponseBlock data={data} />
-      ) : (
-        <div>Make your request</div>
-      )}
+      <div className={stylesCommon.main}>
+        {loading ? (
+          <Loading type={'spinningBubbles'} color={'#1b2240'} />
+        ) : error ? (
+          <ErrorBlock error={error} />
+        ) : data !== null ? (
+          <ResponseBlock data={data} />
+        ) : (
+          <div>Make your request</div>
+        )}
+      </div>
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import { FinalViewOFRequest } from '../../../../../utils/ParseData';
+import { FinalViewOFResponse } from '../../../../../utils/ParseData';
 import styles from './ResponseBlock.module.scss';
 
 type IProps = {
@@ -6,7 +6,7 @@ type IProps = {
 };
 
 export const ResponseBlock = ({ data }: IProps) => {
-  const response = FinalViewOFRequest(JSON.stringify(data));
+  const response = FinalViewOFResponse(JSON.stringify(data));
   return (
     <textarea className={styles.textarea} value={response} onInput={(e) => alert(e)}></textarea>
   );

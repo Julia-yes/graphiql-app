@@ -1,5 +1,5 @@
-import { createContext, memo, PropsWithChildren, useState } from 'react';
-import { FinalViewOFRequest } from '../utils/ParseData';
+import { createContext, memo, PropsWithChildren, useEffect, useState } from 'react';
+import { AddTabs } from '../utils/ParseData';
 
 interface IDataContext {
   query: string | null;
@@ -58,12 +58,21 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
   };
 
   const [request, setRequest] = useState<string>(
-    FinalViewOFRequest(
-      'query Test($page: Int) {characters(page: $page) {results {name gender species}}}'
-    )
+    AddTabs('query Test($page: Int) {characters(page: $page) {results {name gender species}}}')
   );
   const setNewRequest = (value: string) => {
     setRequest(value);
+  };
+
+  useEffect(() => {
+    setNewLoading(true);
+    checkRows();
+    setNewLoading(false);
+  }, [request]);
+
+  const checkRows = () => {
+    const numNewlines = (request.match(/\n/g) || []).length + 1;
+    setNewRows(numNewlines ? numNewlines : 1);
   };
 
   return (
@@ -87,3 +96,27 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
     </DataContext.Provider>
   );
 });
+
+
+
+// export const FinalViewOFRequest = (data: string) => {
+//   const parsedData = ParseData(data).join(' ');
+//   console.log(parsedData);
+//   let string = AddNewLine(parsedData);
+//   console.log('1',string);
+//   string = Add(string);
+//   console.log('2',string);
+//   string = AddNewLineAfterComma(string);
+//   console.log('3',string);
+//   return string;
+// };
+
+// export const AddNewLine = (data: string) => {
+//   return data.replace(/([\{\}\[\]])/g, '$1\n');
+// };
+// export const Add = (data: string) => {
+//   return data.replace(/([\{\}\[\]])/g, '$1\n');
+// };
+// export const AddNewLineAfterComma = (data: string) => {
+//   return data.replace(/([\{\}\[\]])/g, '$1\n');
+// };

@@ -5,7 +5,8 @@ import styles from './Request.module.scss';
 import { DataContext } from '../../../../context/Context';
 import { LoadSource } from '../../../../utils/LoadSource';
 import { ChecksStaples } from '../../../../utils/ChecksStaples';
-import { FinalViewOFRequest, ParseDataBySymbols } from '../../../../utils/ParseData';
+import { AddTabs, ParseDataBySymbols } from '../../../../utils/ParseData';
+import { Button } from '../../../Button/Button';
 
 export const Request = () => {
   const { setNewData, setNewError, rows, request, error, setNewLoading, setNewRequest } =
@@ -41,6 +42,10 @@ export const Request = () => {
       parseResult[0] === 'query' &&
       (parseResult[2] === '(' || parseResult[2] === '{' || parseResult[2] === '')
     ) {
+      if (parseResult[1].length > 40) {
+        setNewError('Too long name of request.');
+        return;
+      }
       setQueryTitle(parseResult[1]);
       return;
     } else {
@@ -61,7 +66,7 @@ export const Request = () => {
   };
 
   const EditRequest = () => {
-    setNewRequest(FinalViewOFRequest(request.replace(/[\r\n]+/g, '')));
+    setNewRequest(AddTabs(request.replace(/[\r\n]+/g, '')));
   };
 
   const BuildRows = () => {
@@ -81,21 +86,21 @@ export const Request = () => {
           <span className='material-icons'>arrow_circle_right</span>
         </button>
       </div>
-      <button onClick={() => DeleteRequest()}>
-        <span className={`material-icons ${styles.button__icon}`}>delete</span>
-      </button>
-      <button onClick={() => EditRequest()}>
-        <span className={`material-icons ${styles.button__icon}`}>auto_fix_high</span>
-      </button>
-      <div className={styles.editorArea}>
-        <div className={styles.rows}>
-          {BuildRows().map((item) => (
-            <div key={item} className={styles.row}>
-              {item}
-            </div>
-          ))}
+      <div className={stylesCommon.main}>
+        <div className={styles.editorArea}>
+          <div className={styles.rows}>
+            {BuildRows().map((item) => (
+              <div key={item} className={styles.row}>
+                {item}
+              </div>
+            ))}
+          </div>
+          <Editor />
         </div>
-        <Editor />
+        <aside className={styles.buttons}>
+          <Button icon='delete' callback={DeleteRequest} />
+          <Button icon='auto_fix_high' callback={EditRequest} />
+        </aside>
       </div>
     </section>
   );

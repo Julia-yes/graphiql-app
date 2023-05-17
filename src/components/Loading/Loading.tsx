@@ -8,6 +8,6 @@ type IProps = {
 
 export const Loading = ({ type, color }: IProps) => (
   <div className={styles.loading}>
-    <ReactLoading type={type} color={color} height={100} width={100} />
+    <ReactLoading type={type} color={color} height={50} width={50} />
   </div>
 );
