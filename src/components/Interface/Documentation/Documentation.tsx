@@ -13,7 +13,6 @@ import { useState, useEffect } from 'react';
 import DocType from '../../../types/DocType';
 import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
-import { shallowEqual } from 'react-redux';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
