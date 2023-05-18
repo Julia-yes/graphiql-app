@@ -118,36 +118,45 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
 
   return (
     <div className={docClasses}>
-      <button className={styles.back_button} onClick={() => goBackInHistory()}>
-        назад
-      </button>
+      <span
+        className={'material-symbols-outlined ' + styles.button_back}
+        onClick={() => goBackInHistory()}
+      >
+        arrow_back
+      </span>
       <h2 className={styles.title}>Documentation</h2>
-      <div className='content'>
-        {selectedType ? (
-          <div>
-            <h3>{selectedType.name}</h3>
-            {selectedType.description && <p>{selectedType.description}</p>}
-            {selectedType.fields?.map((field) => (
-              <div key={field.name} onClick={() => handleSelectField(field.type || '')}>
-                <h4 className={styles.field}>{field.name}</h4>:
-                <span className='code'>{field.type || field.value}</span>
-                {field.description && <p>{field.description}</p>}
-              </div>
+      {selectedType ? (
+        <div>
+          <h3 className={styles.subtitle}>{selectedType.name}</h3>
+          {selectedType.description && <p>{selectedType.description}</p>}
+          {selectedType.fields?.map((field) => (
+            <div
+              className={styles.field}
+              key={field.name}
+              onClick={() => handleSelectField(field.type || '')}
+            >
+              <h4 className={styles.field_title}>{field.name}</h4>:
+              <span className={styles.field_type}>{field.type || field.value}</span>
+              {field.description && <p>{field.description}</p>}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <ul className={styles.type_list}>
+            {types.map((type) => (
+              <li
+                className={styles.list_item}
+                key={type.name}
+                onClick={() => handleSelectType(type)}
+              >
+                <h4>{type.name}</h4>
+              </li>
             ))}
-          </div>
-        ) : (
-          <div>
-            <ul className={styles.type_list}>
-              {types.map((type) => (
-                <li key={type.name} onClick={() => handleSelectType(type)}>
-                  <h4>{type.name}</h4>
-                </li>
-              ))}
-            </ul>
-            <p>Select a type from the documentation.</p>
-          </div>
-        )}
-      </div>
+          </ul>
+          <p className={styles.desc}>Select a type from the documentation.</p>
+        </div>
+      )}
     </div>
   );
 };
