@@ -1,3 +1,4 @@
+import Loading from '../Loading/Loading';
 import {
   getIntrospectionQuery,
   buildClientSchema,
@@ -12,6 +13,7 @@ import { useState, useEffect } from 'react';
 import DocType from '../../../types/DocType';
 import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
+import { shallowEqual } from 'react-redux';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
@@ -125,37 +127,41 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
         arrow_back
       </span>
       <h2 className={styles.title}>Documentation</h2>
-      {selectedType ? (
-        <div>
-          <h3 className={styles.subtitle}>{selectedType.name}</h3>
-          {selectedType.description && <p>{selectedType.description}</p>}
-          {selectedType.fields?.map((field) => (
-            <div
-              className={styles.field}
-              key={field.name}
-              onClick={() => handleSelectField(field.type || '')}
-            >
-              <h4 className={styles.field_title}>{field.name}</h4>:
-              <span className={styles.field_type}>{field.type || field.value}</span>
-              {field.description && <p>{field.description}</p>}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>
-          <ul className={styles.type_list}>
-            {types.map((type) => (
-              <li
-                className={styles.list_item}
-                key={type.name}
-                onClick={() => handleSelectType(type)}
+      {schema ? (
+        selectedType ? (
+          <div>
+            <h3 className={styles.subtitle}>{selectedType.name}</h3>
+            {selectedType.description && <p>{selectedType.description}</p>}
+            {selectedType.fields?.map((field) => (
+              <div
+                className={styles.field}
+                key={field.name}
+                onClick={() => handleSelectField(field.type || '')}
               >
-                <h4>{type.name}</h4>
-              </li>
+                <h4 className={styles.field_title}>{field.name}</h4>:
+                <span className={styles.field_type}>{field.type || field.value}</span>
+                {field.description && <p>{field.description}</p>}
+              </div>
             ))}
-          </ul>
-          <p className={styles.desc}>Select a type from the documentation.</p>
-        </div>
+          </div>
+        ) : (
+          <div>
+            <ul className={styles.type_list}>
+              {types.map((type) => (
+                <li
+                  className={styles.list_item}
+                  key={type.name}
+                  onClick={() => handleSelectType(type)}
+                >
+                  <h4>{type.name}</h4>
+                </li>
+              ))}
+            </ul>
+            <p className={styles.desc}>Select a type from the documentation.</p>
+          </div>
+        )
+      ) : (
+        <Loading />
       )}
     </div>
   );
