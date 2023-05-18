@@ -8,7 +8,6 @@ type IProps = {
 };
 
 export const Editor = ({ type }: IProps) => {
-  console.log(type);
   const { request, setNewRequest, variables, setNewVariables, headers, setNewHeaders } =
     useContext(DataContext);
 

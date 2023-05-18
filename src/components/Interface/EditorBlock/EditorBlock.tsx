@@ -4,11 +4,10 @@ import { Editor } from '../Editor/Editor';
 
 type IProps = {
   type: Sections;
-  rows: number
+  rows: number;
 };
 
 export const EditorBlock = ({ type, rows }: IProps) => {
-
   const BuildRows = () => {
     let arr = [];
     for (let i = 1; i <= rows; i++) {
@@ -18,15 +17,17 @@ export const EditorBlock = ({ type, rows }: IProps) => {
   };
 
   return (
-    <div className={styles.editorArea}>
-      <div className={styles.rows}>
-        {BuildRows().map((item) => (
-          <div key={item} className={styles.row}>
-            {item}
-          </div>
-        ))}
+    <div className={styles.wrapper}>
+      <div className={styles.editorArea}>
+        <div className={styles.rows}>
+          {BuildRows().map((item) => (
+            <div key={item} className={styles.row}>
+              {item}
+            </div>
+          ))}
+        </div>
+        <Editor type={type} />
       </div>
-      <Editor type={type}/>
     </div>
   );
 };

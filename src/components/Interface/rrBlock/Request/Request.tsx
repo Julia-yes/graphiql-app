@@ -3,7 +3,7 @@ import stylesCommon from '../RRBlock.module.scss';
 import styles from './Request.module.scss';
 import { DataContext } from '../../../../context/Context';
 import { LoadSource } from '../../../../utils/LoadSource';
-import { ChecksStaples } from '../../../../utils/ChecksStaples';
+import { CheckStaples } from '../../../../utils/CheckStaples';
 import { AddTabs, ParseDataBySymbols } from '../../../../utils/ParseData';
 import { Button } from '../../../Button/Button';
 import { EditorBlock } from '../../EditorBlock/EditorBlock';
@@ -12,30 +12,39 @@ import { SectionsBlock } from '../SectionsBlock/SectionsBlock';
 import { checkRows } from '../../../../utils/CheckRows';
 
 export const Request = () => {
-  const { setNewData, setNewError, request, error, setNewLoading, setNewRequest } =
+  const { setNewData, setNewError, request, error, setNewLoading, setNewRequest, variables } =
     useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
 
   useEffect(() => {
-    SetQueryName(request);
+    CheckRequest(request);
   }, [request]);
 
   const MakeRequest = async () => {
-    const isGoodRequest = await CheckRequest(request);
-    if (isGoodRequest) {
-      setNewLoading(true);
-      try {
-        const data = await LoadSource(request);
-        setNewData(data);
-      } catch (error) {
-        setNewError('Invalid request');
-      } finally {
-        setNewLoading(false);
+    setNewData(null);
+    const isGoodRequest = await CheckStaples(request);
+    const isGoodVariables = variables ? await CheckVariables(variables) : true;
+    if (isGoodVariables) {
+      if (isGoodRequest) {
+        setNewLoading(true);
+        try {
+          const data = await LoadSource(request, variables);
+          setNewData(data);
+        } catch (error) {
+          console.log(error);
+          setNewError('Invalid request');
+        } finally {
+          setNewLoading(false);
+        }
+      } else {
+        setNewError('problem with staples');
       }
+    } else {
+      return;
     }
   };
 
-  const SetQueryName = (data: string) => {
+  const CheckRequest = (data: string) => {
     const parseResult = ParseDataBySymbols(data);
     setNewError('');
     if (!data) {
@@ -61,20 +70,27 @@ export const Request = () => {
     }
   };
 
-  const CheckRequest = (data: string) => {
-    const error = ChecksStaples(data);
-    if (!error) {
-      setNewError('problem with staples');
-    }
-    return error;
-  };
-
   const DeleteRequest = () => {
     setNewRequest('');
   };
 
   const EditRequest = () => {
     setNewRequest(AddTabs(request.replace(/[\r\n]+/g, '')));
+  };
+
+  const CheckVariables = (data: string) => {
+    console.log('1', data);
+    let res = data.trim().split('');
+    if (res[0] !== '{' && res[-1] !== '}') {
+      setNewError('Variables object must be in "{}"');
+      return false;
+    }
+    else {
+      try {}
+      let ar = JSON.parse(data);
+      console.log('3',ar)
+    }
+    console.log('2', res);
   };
 
   return (

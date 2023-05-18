@@ -1,4 +1,4 @@
-import { createContext, memo, PropsWithChildren, useEffect, useState } from 'react';
+import { createContext, memo, PropsWithChildren, useState } from 'react';
 import { AddTabs } from '../utils/ParseData';
 import { Sections } from '../enums/Sections';
 

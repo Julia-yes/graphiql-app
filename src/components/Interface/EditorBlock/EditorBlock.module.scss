@@ -1,13 +1,13 @@
 @import '../../../variables.scss';
 
-.editorArea {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+.wrapper {
   flex-grow: 1;
   overflow-y: scroll;
+  box-sizing: border-box;
+  line-height: 20px;
+  font-size: 14px;
+  padding-left: 10px;
   height: 100%;
-
   &::-webkit-scrollbar-track {
     padding: 2px 0;
     border-radius: 3px;
@@ -25,8 +25,12 @@
   }
 }
 
+.editorArea {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .row {
-  line-height: 20px;
   color: $gray-dark;
-  font-size: 14px;
 }
