@@ -21,6 +21,8 @@ export const Request = () => {
     setNewRequest,
     variables,
     setNewVariablesError,
+    headers,
+    headersKey,
   } = useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
 
@@ -40,7 +42,7 @@ export const Request = () => {
       if (isGoodRequest) {
         setNewLoading(true);
         try {
-          const data = await LoadSource(request, variables);
+          const data = await LoadSource(request, variables, headers, headersKey);
           setNewData(data);
         } catch (error) {
           console.log(error);
@@ -92,7 +94,6 @@ export const Request = () => {
   };
 
   const CheckVariables = (data: string) => {
-    console.log('1', data);
     setNewVariablesError('');
     let res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
@@ -102,8 +103,7 @@ export const Request = () => {
       try {
         JSON.parse(data);
         return true;
-      } catch (er) {
-        console.log(er);
+      } catch {
         setNewVariablesError(
           'Problem with variables query: Property keys must be doublequoted or invalid format of the variable value'
         );

@@ -7,6 +7,8 @@ interface IDataContext {
   setNewVariables(value: string): void;
   headers: string;
   setNewHeaders(value: string): void;
+  headersKey: string;
+  setNewHeadersKey(value: string): void;
   data: object | null;
   setNewData(newData: object | null): void;
   loading: boolean;
@@ -28,6 +30,8 @@ export const DataContext = createContext<IDataContext>({
   setNewVariables: () => {},
   headers: '',
   setNewHeaders: () => {},
+  headersKey: '',
+  setNewHeadersKey: () => {},
   data: null,
   setNewData: () => {},
   loading: false,
@@ -49,9 +53,15 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
   const setNewVariables = (value: string) => {
     setVariables(value);
   };
+
   const [headers, setHeaders] = useState<string>('');
   const setNewHeaders = (value: string) => {
     setHeaders(value);
+  };
+
+  const [headersKey, setHeadersKey] = useState<string>('');
+  const setNewHeadersKey = (value: string) => {
+    setHeadersKey(value);
   };
 
   const [data, setData] = useState<object | null>(null);
@@ -100,6 +110,8 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
         setNewVariables,
         headers,
         setNewHeaders,
+        headersKey,
+        setNewHeadersKey,
         data,
         setNewData,
         loading,

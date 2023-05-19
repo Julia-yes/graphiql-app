@@ -5,9 +5,10 @@ import { EditorBlock } from '../../EditorBlock/EditorBlock';
 import { Sections } from '../../../../enums/Sections';
 import { Button } from '../../../Button/Button';
 import { checkRows } from '../../../../utils/CheckRows';
+import { HeadersBlock } from '../../HeadersBlock/HeadersBlock';
 
 export const SectionsBlock = () => {
-  const { section, changeSection, sectionState, changeSectionState, variables, headers } =
+  const { section, changeSection, sectionState, changeSectionState, variables } =
     useContext(DataContext);
 
   const SetSection = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -43,10 +44,11 @@ export const SectionsBlock = () => {
       </div>
       {sectionState && (
         <div className={styles.editorWrapper}>
-          <EditorBlock
-            type={section === Sections.HEADERS ? Sections.HEADERS : Sections.VARIABLES}
-            rows={section === Sections.VARIABLES ? checkRows(variables) : checkRows(headers)}
-          />
+          {section === Sections.VARIABLES ? (
+            <EditorBlock type={Sections.VARIABLES} rows={checkRows(variables)} />
+          ) : (
+            <HeadersBlock />
+          )}
         </div>
       )}
     </section>
