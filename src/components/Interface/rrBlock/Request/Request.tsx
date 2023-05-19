@@ -80,17 +80,21 @@ export const Request = () => {
 
   const CheckVariables = (data: string) => {
     console.log('1', data);
+    setNewError('')
     let res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
       setNewError('Variables object must be in "{}"');
       return false;
+    } else {
+      try {
+        JSON.parse(data);
+        return true
+      } catch (er) {
+        console.log(er)
+        setNewError('Property keys must be doublequoted')
+        return false
+      }
     }
-    else {
-      try {}
-      let ar = JSON.parse(data);
-      console.log('3',ar)
-    }
-    console.log('2', res);
   };
 
   return (

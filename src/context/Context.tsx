@@ -102,7 +102,7 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
         section,
         changeSection,
         sectionState,
-        changeSectionState
+        changeSectionState,
       }}
     >
       {children}
