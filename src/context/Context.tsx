@@ -13,6 +13,8 @@ interface IDataContext {
   setNewLoading(value: boolean): void;
   error: string | null;
   setNewError(value: string): void;
+  variablesError: string | null;
+  setNewVariablesError(value: string): void;
   request: string;
   setNewRequest(value: string): void;
   section: Sections.HEADERS | Sections.VARIABLES;
@@ -32,6 +34,8 @@ export const DataContext = createContext<IDataContext>({
   setNewLoading: () => {},
   error: null,
   setNewError: () => {},
+  variablesError: null,
+  setNewVariablesError: () => {},
   request: '',
   setNewRequest: () => {},
   section: Sections.VARIABLES,
@@ -63,6 +67,11 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
   const [error, setError] = useState('');
   const setNewError = (value: string) => {
     setError(value);
+  };
+
+  const [variablesError, setVariablesError] = useState('');
+  const setNewVariablesError = (value: string) => {
+    setVariablesError(value);
   };
 
   const [request, setRequest] = useState<string>(
@@ -97,6 +106,8 @@ export const DataProvider = memo(({ children }: PropsWithChildren) => {
         setNewLoading,
         error,
         setNewError,
+        variablesError,
+        setNewVariablesError,
         request,
         setNewRequest,
         section,

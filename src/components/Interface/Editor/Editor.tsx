@@ -8,8 +8,16 @@ type IProps = {
 };
 
 export const Editor = ({ type }: IProps) => {
-  const { request, setNewRequest, variables, setNewVariables, headers, setNewHeaders } =
-    useContext(DataContext);
+  const {
+    request,
+    setNewRequest,
+    variables,
+    setNewVariables,
+    headers,
+    setNewHeaders,
+    error,
+    variablesError,
+  } = useContext(DataContext);
 
   const initValue =
     type === Sections.REQUEST ? request : type === Sections.VARIABLES ? variables : headers;
@@ -26,7 +34,11 @@ export const Editor = ({ type }: IProps) => {
     <>
       <form className={styles.wrapper}>
         <textarea
-          className={styles.textarea}
+          className={
+            (type === Sections.REQUEST && error) || (type === Sections.VARIABLES && variablesError)
+              ? styles.textarea_error
+              : styles.textarea
+          }
           value={initValue}
           onInput={(e) => ChangeRequest(e)}
         ></textarea>

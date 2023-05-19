@@ -12,13 +12,25 @@ import { SectionsBlock } from '../SectionsBlock/SectionsBlock';
 import { checkRows } from '../../../../utils/CheckRows';
 
 export const Request = () => {
-  const { setNewData, setNewError, request, error, setNewLoading, setNewRequest, variables } =
-    useContext(DataContext);
+  const {
+    setNewData,
+    setNewError,
+    request,
+    error,
+    setNewLoading,
+    setNewRequest,
+    variables,
+    setNewVariablesError,
+  } = useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
 
   useEffect(() => {
     CheckRequest(request);
   }, [request]);
+
+  useEffect(() => {
+    setNewVariablesError('');
+  }, [variables]);
 
   const MakeRequest = async () => {
     setNewData(null);
@@ -72,6 +84,7 @@ export const Request = () => {
 
   const DeleteRequest = () => {
     setNewRequest('');
+    setNewData(null);
   };
 
   const EditRequest = () => {
@@ -80,19 +93,21 @@ export const Request = () => {
 
   const CheckVariables = (data: string) => {
     console.log('1', data);
-    setNewError('')
+    setNewVariablesError('');
     let res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
-      setNewError('Variables object must be in "{}"');
+      setNewVariablesError('Variables object must be in "{}"');
       return false;
     } else {
       try {
         JSON.parse(data);
-        return true
+        return true;
       } catch (er) {
-        console.log(er)
-        setNewError('Property keys must be doublequoted')
-        return false
+        console.log(er);
+        setNewVariablesError(
+          'Problem with variables query: Property keys must be doublequoted or invalid format of the variable value'
+        );
+        return false;
       }
     }
   };

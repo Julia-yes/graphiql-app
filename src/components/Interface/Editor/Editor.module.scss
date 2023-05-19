@@ -14,4 +14,9 @@
   height: 100%;
   resize: none;
   font-size: 14px;
+
+  &_error {
+    @extend .textarea;
+    color: $red;
+  }
 }

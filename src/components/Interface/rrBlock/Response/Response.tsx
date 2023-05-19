@@ -6,7 +6,7 @@ import { ErrorBlock } from '../../../Error/Error';
 import { ResponseBlock } from './ResponseBlock/ResponseBlock';
 
 export const Response = () => {
-  const { data, error, loading } = useContext(DataContext);
+  const { data, error, loading, variablesError } = useContext(DataContext);
 
   return (
     <section className={stylesCommon.wrapper}>
@@ -18,10 +18,12 @@ export const Response = () => {
           <Loading type={'spinningBubbles'} color={'#1b2240'} />
         ) : error ? (
           <ErrorBlock error={error} />
+        ) : variablesError ? (
+          <ErrorBlock error={variablesError} />
         ) : data !== null ? (
           <ResponseBlock data={data} />
         ) : (
-          <div>Make your request</div>
+          <div className={stylesCommon.defaultText}>Make your request</div>
         )}
       </div>
     </section>
