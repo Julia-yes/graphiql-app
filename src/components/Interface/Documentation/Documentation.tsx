@@ -27,17 +27,27 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
   const [selectedType, setSelectedType] = useState<DocType | null>(null);
 
   useEffect(() => {
-    async function fetchSchema() {
-      const response = await fetch(schemaUrl, {
+    fetchSchema();
+
+    function fetchSchema() {
+      fetch(schemaUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: getIntrospectionQuery() }),
-      });
-      const { data }: { data: IntrospectionQuery } = await response.json();
-      const clientSchema = buildClientSchema(data);
-      setSchema(clientSchema);
+      })
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw new Error(response.statusText);
+          }
+        })
+        .then(({ data }) => {
+          const clientSchema = buildClientSchema(data);
+          setSchema(clientSchema);
+        })
+        .catch((error) => console.log(error.message));
     }
-    fetchSchema();
   }, []);
 
   useEffect(() => {
