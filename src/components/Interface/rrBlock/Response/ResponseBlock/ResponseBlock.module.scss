@@ -1,0 +1,26 @@
+@import '../../../../../variables.scss';
+
+.textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-sizing: border-box;
+  line-height: 20px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar-track {
+    padding: 2px 0;
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    border-radius: 3px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: $gray;
+  }
+}

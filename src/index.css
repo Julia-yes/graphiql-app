@@ -18,3 +18,7 @@ button,
 input {
   font-family: Jost, 'Segoe UI', sans-serif;
 }
+
+textarea {
+  outline: none;
+}
