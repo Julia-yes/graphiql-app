@@ -2,9 +2,91 @@
 
 .documentation {
   width: 25%;
-  overflow: scroll;
+  position: relative;
+  margin-left: -25%;
+  color: $blue-dark;
+
+  transition: all 1s ease;
+}
+
+.documentation_showed {
+  margin-left: 0;
 }
 
 .title {
-  color: $blue-dark;
+  font-size: 1.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.type_list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.list_item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.field {
+  margin-bottom: 0.4rem;
+}
+
+.field_title {
+  display: inline-block;
+  margin-bottom: 0.15rem;
+  text-decoration: underline;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.field_type {
+  margin-left: 0.3rem;
+  padding: 0.1rem;
+  border: 1px solid $blue-dark;
+  background-color: $blue-light;
+
+  transition: all 0.2s ease;
+}
+
+.field_title:hover + .field_type {
+  color: $blue;
+  border: 1px solid $blue;
+}
+
+.button_back {
+  position: absolute;
+  right: 1rem;
+  top: 0.3rem;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+    color: $blue;
+  }
+}
+
+.desc {
+  margin-top: 0.6rem;
+  opacity: 0.7;
+  color: black;
 }

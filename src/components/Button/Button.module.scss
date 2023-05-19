@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+
+.button {
+  width: 30px;
+  height: 30px;
+  color: $gray-dark;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $blue-dark;
+  }
+}

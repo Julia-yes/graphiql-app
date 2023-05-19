@@ -1,3 +1,4 @@
+import Loading from '../Loading/Loading';
 import {
   getIntrospectionQuery,
   buildClientSchema,
@@ -9,49 +10,49 @@ import {
   GraphQLEnumType,
 } from 'graphql';
 import { useState, useEffect } from 'react';
+import DocType from '../../../types/DocType';
+import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
-type DocField = {
-  [index: string]: string | null | { name: string; type: string; description: string | null }[];
-  name: string;
-  description: string | null;
-  type: string | null;
-  value: string | null;
+type DocProps = {
+  isDocShowed: boolean;
 };
 
-type DocType = {
-  name: string;
-  description: string | null;
-  fields: DocField[] | null;
-};
-
-export const Documentation = () => {
+export const Documentation = ({ isDocShowed }: DocProps) => {
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [types, setTypes] = useState<DocType[]>([]);
-  const [selectedType, setSelectedType] = useState<DocType>();
+  const [history, setHistory] = useState<DocType[]>([]);
+  const [selectedType, setSelectedType] = useState<DocType | null>(null);
 
   useEffect(() => {
-    async function fetchSchema() {
-      const response = await fetch(schemaUrl, {
+    fetchSchema();
+
+    function fetchSchema() {
+      fetch(schemaUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: getIntrospectionQuery() }),
-      });
-      const { data }: { data: IntrospectionQuery } = await response.json();
-      const clientSchema = buildClientSchema(data);
-      setSchema(clientSchema);
+      })
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw new Error(response.statusText);
+          }
+        })
+        .then(({ data }) => {
+          const clientSchema = buildClientSchema(data);
+          setSchema(clientSchema);
+        })
+        .catch((error) => console.log(error.message));
     }
-
-    fetchSchema();
   }, []);
 
   useEffect(() => {
     if (schema) {
       const typeMap = schema.getTypeMap();
-
-      console.log(schema);
 
       const typesInMap = Object.keys(typeMap)
         .filter((typeName) => !typeName.startsWith('__'))
@@ -96,48 +97,81 @@ export const Documentation = () => {
     }
   }, [schema]);
 
+  useEffect(() => {
+    if (history.length === 0) {
+      setSelectedType(null);
+    } else {
+      setSelectedType(history[history.length - 1]);
+    }
+  }, [history]);
+
   function handleSelectType(type: DocType) {
-    setSelectedType(type);
+    setHistory([...history, type]);
   }
 
   function handleSelectField(name: string) {
     const regExp = /\[(.*?)\]/;
     const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
-    console.log(typeName);
     const type = types.find((type) => type.name === typeName);
     if (type) {
-      setSelectedType(type);
+      setHistory([...history, type]);
     }
   }
 
+  function goBackInHistory() {
+    setHistory(history.slice(0, -1));
+  }
+
+  let docClasses = styles.documentation;
+  if (isDocShowed) {
+    docClasses += ' ' + styles.documentation_showed;
+  }
+
   return (
-    <div className={styles.documentation}>
-      <div className='sidebar'>
-        <h2 className={styles.title}>Documentation</h2>
-        <ul>
-          {types.map((type) => (
-            <li key={type.name} onClick={() => handleSelectType(type)}>
-              <h4>{type.name}</h4>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className='content'>
-        {selectedType ? (
+    <div className={docClasses}>
+      <span
+        className={'material-symbols-outlined ' + styles.button_back}
+        onClick={() => goBackInHistory()}
+      >
+        arrow_back
+      </span>
+      <h2 className={styles.title}>Documentation</h2>
+      {schema ? (
+        selectedType ? (
           <div>
-            <h3>{selectedType.name}</h3>
+            <h3 className={styles.subtitle}>{selectedType.name}</h3>
             {selectedType.description && <p>{selectedType.description}</p>}
             {selectedType.fields?.map((field) => (
-              <div key={field.name} onClick={() => handleSelectField(field.type || '')}>
-                <h4>{field.name}</h4>:<span className='code'>{field.type || field.value}</span>
+              <div
+                className={styles.field}
+                key={field.name}
+                onClick={() => handleSelectField(field.type || '')}
+              >
+                <h4 className={styles.field_title}>{field.name}</h4>:
+                <span className={styles.field_type}>{field.type || field.value}</span>
                 {field.description && <p>{field.description}</p>}
               </div>
             ))}
           </div>
         ) : (
-          <p>Select a type from the documentation.</p>
-        )}
-      </div>
+          <div>
+            <ul className={styles.type_list}>
+              {types.map((type) => (
+                <li
+                  className={styles.list_item}
+                  key={type.name}
+                  onClick={() => handleSelectType(type)}
+                >
+                  <h4>{type.name}</h4>
+                </li>
+              ))}
+            </ul>
+            <p className={styles.desc}>Select a type from the documentation.</p>
+          </div>
+        )
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };
