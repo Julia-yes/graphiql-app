@@ -8,8 +8,7 @@ type SettingsProps = {
 export const Settings = ({ docHandler }: SettingsProps) => {
   return (
     <aside className={styles.settings}>
-      <Button icon='description' />
-      <Button icon='refresh' />
+      <Button icon='description' callback={() => docHandler()} />
     </aside>
   );
 };

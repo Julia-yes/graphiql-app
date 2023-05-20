@@ -18,6 +18,7 @@ export const Graphi = () => {
   document.title = Titles.GRAPH;
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [isDocShowed, setIsDocShowed] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -25,32 +26,22 @@ export const Graphi = () => {
     }
   }, [user, navigate]);
 
-  const [isDocShowed, setIsDocShowed] = useState(false);
-
   function showDoc() {
     setIsDocShowed(!isDocShowed);
   }
 
   return (
     <div className={styles.wrapper}>
-      <Settings />
+      <Settings docHandler={() => showDoc()} />
       <DataProvider>
         <section className={styles.interface}>
-          <Documentation />
+          <Documentation isDocShowed={isDocShowed} />
           <div className={styles.rrBlock}>
             <Request />
             <Response />
           </div>
         </section>
       </DataProvider>
-      <Settings docHandler={() => showDoc()} />
-      <section className={styles.interface}>
-        <Documentation isDocShowed={isDocShowed} />
-        <div className={styles.rrBlock}>
-          <Request />
-          <Response />
-        </div>
-      </section>
     </div>
   );
 };
