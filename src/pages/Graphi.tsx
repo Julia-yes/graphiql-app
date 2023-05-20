@@ -14,7 +14,7 @@ import styles from './Graphi.module.scss';
 import { Paths } from '../enums/Paths';
 import { Titles } from '../enums/Titles';
 
-export const Graphi = () => {
+const Graphi = () => {
   document.title = Titles.GRAPH;
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -45,3 +45,5 @@ export const Graphi = () => {
     </div>
   );
 };
+
+export default Graphi;

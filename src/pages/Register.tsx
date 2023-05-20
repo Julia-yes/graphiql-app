@@ -13,7 +13,7 @@ import { Paths } from '../enums/Paths';
 import { UINames } from '../enums/UINames';
 import { Inputs } from '../enums/Inputs';
 
-export const Register = () => {
+const Register = () => {
   const PASS_HINT = 'minimum 8 symbols, at least one letter, one digit, one special character';
 
   document.title = Titles.REGISTER;
@@ -65,3 +65,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register;

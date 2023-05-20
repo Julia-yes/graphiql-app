@@ -12,7 +12,7 @@ import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { Inputs } from '../enums/Inputs';
 
-export const ResetPass = () => {
+const ResetPass = () => {
   const RESET_PASS = 'Reset password';
   const SEND_RESET = 'Send reset email';
   const MESSAGE_SENT = 'Message sent';
@@ -56,3 +56,5 @@ export const ResetPass = () => {
     </div>
   );
 };
+
+export default ResetPass;

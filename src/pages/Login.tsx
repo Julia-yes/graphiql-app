@@ -14,7 +14,7 @@ import { Titles } from '../enums/Titles';
 import { Inputs } from '../enums/Inputs';
 import { UINames } from '../enums/UINames';
 
-export const Login = () => {
+const Login = () => {
   document.title = Titles.LOGIN;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,3 +63,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;
