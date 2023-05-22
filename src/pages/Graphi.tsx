@@ -33,24 +33,16 @@ export const Graphi = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Settings />
+      <Settings docHandler={() => showDoc()} />
       <DataProvider>
         <section className={styles.interface}>
-          <Documentation />
+          <Documentation isDocShowed={isDocShowed} />
           <div className={styles.rrBlock}>
             <Request />
             <Response />
           </div>
         </section>
       </DataProvider>
-      <Settings docHandler={() => showDoc()} />
-      <section className={styles.interface}>
-        <Documentation isDocShowed={isDocShowed} />
-        <div className={styles.rrBlock}>
-          <Request />
-          <Response />
-        </div>
-      </section>
     </div>
   );
 };
