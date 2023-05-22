@@ -2,7 +2,6 @@ import { Loading } from '../../Loading/Loading';
 import {
   getIntrospectionQuery,
   buildClientSchema,
-  GraphQLSchema,
   GraphQLObjectType,
   GraphQLInterfaceType,
   GraphQLInputObjectType,
