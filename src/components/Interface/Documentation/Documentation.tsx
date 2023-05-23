@@ -132,7 +132,7 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
   return (
     <div className={docClasses}>
       <span
-        className={'material-symbols-outlined ' + styles.button_back}
+        className={`material-icons ` + styles.button}
         onClick={() => goBackInHistory()}
       >
         arrow_back

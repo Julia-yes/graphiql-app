@@ -45,7 +45,6 @@ export const Request = () => {
           const data = await LoadSource(request, variables, headers, headersKey);
           setNewData(data);
         } catch (error) {
-          console.log(error);
           setNewError('Invalid request');
         } finally {
           setNewLoading(false);
@@ -95,7 +94,7 @@ export const Request = () => {
 
   const CheckVariables = (data: string) => {
     setNewVariablesError('');
-    const res = data.trim().split('');
+    let res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
       setNewVariablesError('Variables object must be in "{}"');
       return false;
