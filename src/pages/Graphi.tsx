@@ -14,18 +14,17 @@ import styles from './Graphi.module.scss';
 import { Paths } from '../enums/Paths';
 import { Titles } from '../enums/Titles';
 
-export const Graphi = () => {
+const Graphi = () => {
   document.title = Titles.GRAPH;
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [isDocShowed, setIsDocShowed] = useState(false);
 
   useEffect(() => {
     if (!user) {
       navigate(Paths.ROOT);
     }
   }, [user, navigate]);
-
-  const [isDocShowed, setIsDocShowed] = useState(false);
 
   function showDoc() {
     setIsDocShowed(!isDocShowed);
@@ -46,3 +45,5 @@ export const Graphi = () => {
     </div>
   );
 };
+
+export default Graphi;
