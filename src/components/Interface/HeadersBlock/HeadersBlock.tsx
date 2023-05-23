@@ -39,7 +39,3 @@ export const HeadersBlock = () => {
     </div>
   );
 };
-
-//Autorization
-//Accept-Language
-//Cache-Control

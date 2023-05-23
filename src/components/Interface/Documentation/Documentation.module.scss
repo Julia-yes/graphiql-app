@@ -5,8 +5,6 @@
   position: relative;
   margin-left: -25%;
   color: $blue-dark;
-
-  transition: all 1s ease;
 }
 
 .documentation_showed {
@@ -50,7 +48,7 @@
   text-decoration: underline;
 
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 
   &:hover {
     color: $blue;
@@ -63,24 +61,23 @@
   border: 1px solid $blue-dark;
   background-color: $blue-light;
 
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .field_title:hover + .field_type {
   color: $blue;
-  border: 1px solid $blue;
+  border-color: $blue;
 }
 
-.button_back {
+.button {
   position: absolute;
   right: 1rem;
   top: 0.3rem;
 
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 
   &:hover {
-    transform: scale(1.2);
     color: $blue;
   }
 }
