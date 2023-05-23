@@ -23,9 +23,7 @@ export const HeadersBlock = () => {
     <div className={styles.wrapper}>
       <div className={styles.headersArea}>
         <select value={headersKey} onChange={(e) => ChangedHeaderKey(e)}>
-          <option value={'default'} selected>
-            Choose header name
-          </option>
+          <option value={'default'}>Choose header name</option>
           <option value={'Autorization'}>Autorization</option>
           <option value={'Accept-Language'}>Accept-Language</option>
           <option value={'Cache-Control'}>Cache-Control</option>
