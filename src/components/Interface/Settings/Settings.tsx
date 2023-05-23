@@ -1,11 +1,14 @@
 import { Button } from '../../Button/Button';
 import styles from './Settings.module.scss';
 
-export const Settings = () => {
+type SettingsProps = {
+  docHandler: () => void;
+};
+
+export const Settings = ({ docHandler }: SettingsProps) => {
   return (
     <aside className={styles.settings}>
-      <Button icon='description' />
-      <Button icon='refresh' />
+      <Button icon='description' callback={() => docHandler()} />
     </aside>
   );
 };
