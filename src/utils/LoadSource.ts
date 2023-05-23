@@ -1,15 +1,27 @@
-export const LoadSource = async (query: string) => {
+export const LoadSource = async (
+  query: string,
+  variables: string,
+  headers: string,
+  headersKey: string
+) => {
   const apiUrl = `https://rickandmortyapi.com/graphql`;
+
+  let requestHeaders: HeadersInit = {
+    'Content-type': 'application/json',
+  };
+
+  if (variables) variables = JSON.parse(variables);
+  if (headers && headersKey) {
+    requestHeaders[headersKey] = headers;
+  }
 
   const response = await fetch(apiUrl, {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
+    headers: requestHeaders,
+    body: JSON.stringify({ query, variables }),
   });
   if (!response.ok) {
-    return new Error('Could not load the data from the resourse');
+    throw new Error('Could not load the data from the resourse');
   } else {
     const data = await response.json();
     return data;

@@ -1,0 +1,17 @@
+@import '../../../variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.headersArea {
+  @extend .wrapper;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.input {
+  padding-left: 10px;
+}

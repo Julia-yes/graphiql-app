@@ -1,4 +1,4 @@
-export const ChecksStaples = (data: string) => {
+export const CheckStaples = (data: string) => {
   const staples = JSON.stringify(data)
     .match(/[{}()]+/g)
     ?.join('')

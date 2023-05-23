@@ -3,32 +3,20 @@
 .wrapper {
   width: 100%;
   box-sizing: border-box;
-  height: 100%;
 }
 
 .textarea {
-  box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   border: none;
   box-sizing: border-box;
-  line-height: 20px;
   color: $blue-dark;
-  overflow-y: scroll;
+  height: 100%;
+  resize: none;
+  font-size: 14px;
 
-  &::-webkit-scrollbar-track {
-    padding: 2px 0;
-    border-radius: 3px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar {
-    border-radius: 3px;
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background-color: $gray;
+  &_error {
+    @extend .textarea;
+    color: $red;
   }
 }

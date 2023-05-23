@@ -28,8 +28,14 @@
 
 .main {
   display: flex;
-  flex-direction: row;
   width: 100%;
-  justify-content: space-between;
+  flex-direction: column;
   flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.defaultText {
+  text-align: center;
+  color: $blue-dark;
+  font-size: 20px;
 }
