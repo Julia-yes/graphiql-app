@@ -107,7 +107,13 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
 
   function handleSelectField(name: string) {
     const regExp = /\[(.*?)\]/;
-    const typeName = regExp.exec(name) ? regExp.exec(name)![1] : name;
+    let typeName: string;
+    if (regExp.exec(name)) {
+      const newName = regExp.exec(name) as RegExpExecArray;
+      typeName = newName[1];
+    } else {
+      typeName = name;
+    }
     const type = types.find((type) => type.name === typeName);
     if (type) {
       setHistory([...history, type]);
