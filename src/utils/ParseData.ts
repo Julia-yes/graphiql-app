@@ -12,7 +12,7 @@ export const ParseData = (data: string) => {
 
 export const ParseDataBySymbols = (data: string) => {
   const parsedRequest = ParseData(data);
-  let result = parsedRequest
+  const result = parsedRequest
     .replace(/['"]/g, '')
     .replace(/([{}():])/g, ' $1 ')
     .split(' ');
@@ -20,11 +20,11 @@ export const ParseDataBySymbols = (data: string) => {
 };
 
 export const FinalViewOFResponse = (data: string) => {
-  let parsedData = ParseData(data).split(' ');
-  let string = parsedData
+  const parsedData = ParseData(data).split(' ');
+  const string = parsedData
     .join(' ')
     .replace(/\ \":/g, '": ')
-    .replace(/\  \"/g, ' "')
+    .replace(/\ {2}\"/g, ' "')
     .replace(/ ",/g, '",\n')
     .replace(/ "}/g, '"\n}')
     .replace(/,{/g, ',\n{')
@@ -40,11 +40,11 @@ export const AddTabs = (data: string) => {
   const result = ParseData(data)
     .replace(/['"]/g, '')
     .replace(/[[{]/g, (match) => {
-      let spaces = '  '.repeat(++indentation);
+      const spaces = '  '.repeat(++indentation);
       return match + '\n' + spaces;
     })
     .replace(/[\]}]/g, (match) => {
-      let spaces = '  '.repeat(--indentation);
+      const spaces = '  '.repeat(--indentation);
       return '\n' + spaces + match;
     });
   return result;

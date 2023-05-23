@@ -9,7 +9,7 @@ type IProps = {
 
 export const EditorBlock = ({ type, rows }: IProps) => {
   const BuildRows = () => {
-    let arr = [];
+    const arr = [];
     for (let i = 1; i <= rows; i++) {
       arr.push(i);
     }

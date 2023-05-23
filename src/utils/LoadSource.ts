@@ -6,7 +6,7 @@ export const LoadSource = async (
 ) => {
   const apiUrl = `https://rickandmortyapi.com/graphql`;
 
-  let requestHeaders: HeadersInit = {
+  const requestHeaders: HeadersInit = {
     'Content-type': 'application/json',
   };
 
