@@ -9,7 +9,7 @@ import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { UINames } from '../enums/UINames';
 
-export const Welcome = () => {
+const Welcome = () => {
   const H1 = 'Welcome, GraphQL enjoyers';
   const APP_DESC =
     'Whether you want a simple GraphiQL IDE instance for your server, or a more advanced web or desktop GraphQL IDE experience for your framework or plugin, or you want to build an IDE extension or plugin, you&apos;ve come to the right place!';
@@ -65,3 +65,5 @@ export const Welcome = () => {
     </div>
   );
 };
+
+export default Welcome;
