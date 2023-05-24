@@ -45,7 +45,6 @@ export const Request = () => {
           const data = await LoadSource(request, variables, headers, headersKey);
           setNewData(data);
         } catch (error) {
-          console.log(error);
           setNewError('Invalid request');
         } finally {
           setNewLoading(false);
