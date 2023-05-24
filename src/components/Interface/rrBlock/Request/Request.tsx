@@ -10,6 +10,9 @@ import { EditorBlock } from '../../EditorBlock/EditorBlock';
 import { Sections } from '../../../../enums/Sections';
 import { SectionsBlock } from '../SectionsBlock/SectionsBlock';
 import { checkRows } from '../../../../utils/CheckRows';
+import { useTranslation } from 'react-i18next';
+import { Localization } from '../../../../enums/Localization';
+import { Errors } from '../../../../enums/Errors';
 
 export const Request = () => {
   const {
@@ -25,6 +28,7 @@ export const Request = () => {
     headersKey,
   } = useContext(DataContext);
   const [queryTitle, setQueryTitle] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     CheckRequest(request);
@@ -45,12 +49,12 @@ export const Request = () => {
           const data = await LoadSource(request, variables, headers, headersKey);
           setNewData(data);
         } catch (error) {
-          setNewError('Invalid request');
+          setNewError(Errors.INVALID_REQUEST);
         } finally {
           setNewLoading(false);
         }
       } else {
-        setNewError('problem with staples');
+        setNewError(Errors.PROBLEM_WITH_STAPLES);
       }
     } else {
       return;
@@ -61,11 +65,11 @@ export const Request = () => {
     const parseResult = ParseDataBySymbols(data);
     setNewError('');
     if (!data) {
-      setNewError('Request is empty, write something.');
+      setNewError(Errors.EMPTY_REQUEST);
       return;
     }
     if (parseResult[0] !== 'query') {
-      setNewError('Your query must start with word "query".');
+      setNewError(Errors.REQUIRED_QUERY_WORD);
       return;
     }
     if (
@@ -73,13 +77,13 @@ export const Request = () => {
       (parseResult[2] === '(' || parseResult[2] === '{' || parseResult[2] === '')
     ) {
       if (parseResult[1].length > 40) {
-        setNewError('Too long name of request.');
+        setNewError(Errors.LONG_NAME);
         return;
       }
       setQueryTitle(parseResult[1]);
       return;
     } else {
-      setNewError('Error in your query');
+      setNewError(Errors.QUERY_ERROR);
     }
   };
 
@@ -96,16 +100,14 @@ export const Request = () => {
     setNewVariablesError('');
     const res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
-      setNewVariablesError('Variables object must be in "{}"');
+      setNewVariablesError(Errors.OBJECT_PROBLEM);
       return false;
     } else {
       try {
         JSON.parse(data);
         return true;
       } catch {
-        setNewVariablesError(
-          'Problem with variables query: Property keys must be doublequoted or invalid format of the variable value'
-        );
+        setNewVariablesError(Errors.VARIABLES_PROBLEM);
         return false;
       }
     }
@@ -114,7 +116,7 @@ export const Request = () => {
   return (
     <section className={stylesCommon.wrapper}>
       <div className={stylesCommon.titleArea}>
-        <h3 className={stylesCommon.title}>Request</h3>
+        <h3 className={stylesCommon.title}>{t(Localization.REQUEST)}</h3>
         <button className={styles.button} disabled={error ? true : false} onClick={MakeRequest}>
           <span className={styles.button__title}>{queryTitle ? queryTitle : 'Run'}</span>
           <span className='material-icons'>arrow_circle_right</span>

@@ -135,15 +135,11 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
   return (
     <div className={docClasses}>
       <div className={styles.titleArea}>
-        <h2 className={styles.title}>Documentation</h2>
+        <h2 className={styles.title}>{t(Localization.DOC)}</h2>
         <span className={`material-icons ` + styles.button} onClick={() => goBackInHistory()}>
           arrow_back
         </span>
       </div>
-      <span className={`material-icons ` + styles.button} onClick={() => goBackInHistory()}>
-        arrow_back
-      </span>
-      <h2 className={styles.title}>{t(Localization.DOC)}</h2>
       {!isLoading ? (
         !err ? (
           selectedType ? (
@@ -175,7 +171,7 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
                   </li>
                 ))}
               </ul>
-              <p className={styles.desc}>Select a type from the documentation.</p>
+              <p className={styles.desc}>{t(Localization.DOCUMENTATION_ADVICE)}</p>
             </div>
           )
         ) : (
