@@ -12,7 +12,7 @@ import { Loading } from '../../Loading/Loading';
 import DocType from '../../../types/DocType';
 import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
-import { Localization } from '../../../enums/localization';
+import { Localization } from '../../../enums/Localization';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 

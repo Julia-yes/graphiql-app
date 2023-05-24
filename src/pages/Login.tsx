@@ -14,7 +14,7 @@ import { Paths } from '../enums/Paths';
 import { Titles } from '../enums/Titles';
 import { Inputs } from '../enums/Inputs';
 import { UINames } from '../enums/UINames';
-import { Localization } from '../enums/localization';
+import { Localization } from '../enums/Localization';
 
 const Login = () => {
   const [email, setEmail] = useState('');

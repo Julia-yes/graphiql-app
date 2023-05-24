@@ -12,7 +12,7 @@ import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { Inputs } from '../enums/Inputs';
 import { useTranslation } from 'react-i18next';
-import { Localization } from '../enums/localization';
+import { Localization } from '../enums/Localization';
 
 const ResetPass = () => {
   const [email, setEmail] = useState('');

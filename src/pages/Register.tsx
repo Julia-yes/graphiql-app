@@ -13,7 +13,7 @@ import { Paths } from '../enums/Paths';
 import { UINames } from '../enums/UINames';
 import { Inputs } from '../enums/Inputs';
 import { useTranslation } from 'react-i18next';
-import { Localization } from '../enums/localization';
+import { Localization } from '../enums/Localization';
 
 const Register = () => {
   const [email, setEmail] = useState('');

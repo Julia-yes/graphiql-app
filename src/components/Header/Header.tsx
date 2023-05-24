@@ -9,7 +9,7 @@ import styles from './Header.module.scss';
 import { Paths } from '../../enums/Paths';
 import { UINames } from '../../enums/UINames';
 import { Inputs } from '../../enums/Inputs';
-import { Localization } from '../../enums/localization';
+import { Localization } from '../../enums/Localization';
 
 export const Header = () => {
   const RLX = 'rlx';

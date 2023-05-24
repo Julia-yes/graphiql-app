@@ -9,7 +9,7 @@ import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { UINames } from '../enums/UINames';
 import { useTranslation } from 'react-i18next';
-import { Localization } from '../enums/localization';
+import { Localization } from '../enums/Localization';
 
 const Welcome = () => {
   const [user] = useAuthState(auth);

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import styles from './NotFound.module.scss';
-import { Localization } from '../enums/localization';
+import { Localization } from '../enums/Localization';
 
 const NotFound = () => {
   const { t } = useTranslation();
