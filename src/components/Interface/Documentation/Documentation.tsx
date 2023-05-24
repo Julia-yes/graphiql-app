@@ -1,4 +1,3 @@
-import { Loading } from '../../Loading/Loading';
 import {
   getIntrospectionQuery,
   buildClientSchema,
@@ -8,9 +7,12 @@ import {
   GraphQLEnumType,
 } from 'graphql';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Loading } from '../../Loading/Loading';
 import DocType from '../../../types/DocType';
 import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
+import { Localization } from '../../../enums/localization';
 
 const schemaUrl = 'https://rickandmortyapi.com/graphql';
 
@@ -23,6 +25,7 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
   const [selectedType, setSelectedType] = useState<DocType | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchSchema();
@@ -131,13 +134,10 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
 
   return (
     <div className={docClasses}>
-      <span
-        className={`material-icons ` + styles.button}
-        onClick={() => goBackInHistory()}
-      >
+      <span className={`material-icons ` + styles.button} onClick={() => goBackInHistory()}>
         arrow_back
       </span>
-      <h2 className={styles.title}>Documentation</h2>
+      <h2 className={styles.title}>{t(Localization.DOC)}</h2>
       {!isLoading ? (
         !err ? (
           selectedType ? (

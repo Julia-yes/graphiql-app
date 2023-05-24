@@ -12,16 +12,18 @@ import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { UINames } from '../enums/UINames';
 import { Inputs } from '../enums/Inputs';
+import { useTranslation } from 'react-i18next';
+import { Localization } from '../enums/localization';
 
 const Register = () => {
-  const PASS_HINT = 'minimum 8 symbols, at least one letter, one digit, one special character';
-
-  document.title = Titles.REGISTER;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const toastError = (err: Error) => toast.error(err.message);
+
+  document.title = t(Titles.REGISTER);
 
   useEffect(() => {
     if (user) {
@@ -41,9 +43,9 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.h2}>{UINames.SIGN_UP}</h2>
+        <h2 className={styles.h2}>{t(UINames.SIGN_UP)}</h2>
         <NavLink className={`${styles.headLink} ${styles.link}`} to={Paths.LOGIN}>
-          {UINames.SIGN_IN}
+          {t(UINames.SIGN_IN)}
         </NavLink>
       </div>
       <form onSubmit={(e) => register(e)}>
@@ -53,12 +55,12 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <p className={styles.hint}>{PASS_HINT}</p>
+        <p className={styles.hint}>{t(Localization.PASS_HINT)}</p>
         <button
           className={styles.button}
           onClick={() => registerWithEmailAndPassword(email, password)}
         >
-          {UINames.REGISTER}
+          {t(UINames.REGISTER)}
         </button>
       </form>
       <ToastContainer />

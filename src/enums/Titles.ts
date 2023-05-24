@@ -1,5 +1,5 @@
 export enum Titles {
-  WELCOM = 'Welcome',
+  WELCOME = 'Welcome',
   LOGIN = 'Sign In',
   REGISTER = 'Sign Up',
   RESET = 'Reset pass',

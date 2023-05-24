@@ -9,6 +9,7 @@ import styles from './Header.module.scss';
 import { Paths } from '../../enums/Paths';
 import { UINames } from '../../enums/UINames';
 import { Inputs } from '../../enums/Inputs';
+import { Localization } from '../../enums/localization';
 
 export const Header = () => {
   const RLX = 'rlx';
@@ -20,7 +21,6 @@ export const Header = () => {
   const [user] = useAuthState(auth);
 
   const handleChangeLng = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(t(UINames.SIGN_IN));
     let lng = 'en';
     if (e.target.checked) {
       lng = 'ru';
@@ -39,19 +39,19 @@ export const Header = () => {
           {user ? (
             <>
               <NavLink className={styles.link} to={Paths.GRAPH}>
-                {t('to_main')}
+                {t(Localization.TO_MAIN)}
               </NavLink>
               <button className={styles.logout} onClick={logout}>
-                {UINames.LOGUOT}
+                {t(UINames.LOGUOT)}
               </button>
             </>
           ) : (
             <>
               <NavLink className={styles.link} to={Paths.LOGIN}>
-                {UINames.SIGN_IN}
+                {t(UINames.SIGN_IN)}
               </NavLink>
               <NavLink className={styles.link} to={Paths.REGISTER}>
-                {UINames.SIGN_UP}
+                {t(UINames.SIGN_UP)}
               </NavLink>
             </>
           )}
