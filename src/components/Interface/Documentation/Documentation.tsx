@@ -131,17 +131,16 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
 
   return (
     <div className={docClasses}>
-      <span
-        className={`material-icons ` + styles.button}
-        onClick={() => goBackInHistory()}
-      >
-        arrow_back
-      </span>
-      <h2 className={styles.title}>Documentation</h2>
+      <div className={styles.titleArea}>
+        <h2 className={styles.title}>Documentation</h2>
+        <span className={`material-icons ` + styles.button} onClick={() => goBackInHistory()}>
+          arrow_back
+        </span>
+      </div>
       {!isLoading ? (
         !err ? (
           selectedType ? (
-            <div>
+            <div className={styles.wrapper}>
               <h3 className={styles.subtitle}>{selectedType.name}</h3>
               {selectedType.description && <p>{selectedType.description}</p>}
               {selectedType.fields?.map((field) => (
@@ -157,7 +156,7 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
               ))}
             </div>
           ) : (
-            <div>
+            <div className={styles.wrapper}>
               <ul className={styles.type_list}>
                 {types.map((type) => (
                   <li
