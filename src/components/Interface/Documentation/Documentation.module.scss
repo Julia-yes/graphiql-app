@@ -5,11 +5,44 @@
   position: relative;
   margin-left: -25%;
   color: $blue-dark;
-  transition: 1s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  transition: margin 0.5s;
 }
 
 .documentation_showed {
   margin-left: 0;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 0;
+  align-items: center;
+}
+
+.wrapper {
+  flex-grow: 1;
+  overflow-y: scroll;
+  height: 300px;
+  &::-webkit-scrollbar-track {
+    padding: 2px 0;
+    border-radius: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    border-radius: 3px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: $gray;
+  }
 }
 
 .title {
@@ -32,7 +65,7 @@
 
 .list_item {
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 
   &:hover {
     color: $blue;
@@ -61,7 +94,6 @@
   padding: 0.1rem;
   border: 1px solid $blue-dark;
   background-color: $blue-light;
-
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -71,15 +103,13 @@
 }
 
 .button {
-  position: absolute;
-  right: 1rem;
-  top: 0.3rem;
-
   cursor: pointer;
+  padding: 10px;
   transition: color 0.2s ease;
+  color: $gray-dark;
 
   &:hover {
-    color: $blue;
+    color: $blue-dark;
   }
 }
 
