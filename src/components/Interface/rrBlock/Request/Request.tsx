@@ -94,7 +94,7 @@ export const Request = () => {
 
   const CheckVariables = (data: string) => {
     setNewVariablesError('');
-    let res = data.trim().split('');
+    const res = data.trim().split('');
     if (res[0] !== '{' && res[-1] !== '}') {
       setNewVariablesError('Variables object must be in "{}"');
       return false;

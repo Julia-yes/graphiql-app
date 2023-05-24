@@ -1,0 +1,21 @@
+export enum Localization {
+  TO_MAIN = 'To main',
+  DOC = "Documentation",
+  LOGIN = "Login",
+  NOT_FOUND = "Not found",
+  PASS_HINT = "Pass hint",
+  RESET_PASS = 'Reset password',
+  SEND_RESET = 'Send reset email',
+  MESSAGE_SENT = 'Message sent',
+  H1 = 'h1',
+  APP_DESC =
+    'app desc',
+  GRAPH_APP = 'GraphQL App',
+  DEV1 = 'Developer 1',
+  DEV2 = 'Developer 2',
+  DEV3 = 'Developer 3',
+  DEV1_DESC = 'dev1 desc',
+  DEV2_DESC = 'dev2 desc',
+  DEV3_DESC = 'dev3 desc',
+  SCHOOL_DESC = 'school desc',
+}

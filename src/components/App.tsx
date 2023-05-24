@@ -17,8 +17,8 @@ const ResetPass = lazy(() => import('../pages/ResetPass'));
 export const App = () => {
   return (
     <>
-      <Header />
       <Suspense fallback={<Loading type={'spinningBubbles'} color={'#1b2240'} />}>
+        <Header />
         <section className='main'>
           <Routes>
             <Route path={Paths.ROOT} element={<Welcome />} />
