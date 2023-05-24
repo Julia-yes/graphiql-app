@@ -11,18 +11,18 @@ import styles from './Auth.module.scss';
 import { Titles } from '../enums/Titles';
 import { Paths } from '../enums/Paths';
 import { Inputs } from '../enums/Inputs';
+import { useTranslation } from 'react-i18next';
+import { Localization } from '../enums/Localization';
 
 const ResetPass = () => {
-  const RESET_PASS = 'Reset password';
-  const SEND_RESET = 'Send reset email';
-  const MESSAGE_SENT = 'Message sent';
-
-  document.title = Titles.RESET;
   const [email, setEmail] = useState('');
   const [user, loading] = useAuthState(auth);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const toastError = (err: Error) => toast.error(err.message);
-  const toastSuccess = () => toast(MESSAGE_SENT);
+  const toastSuccess = () => toast(t(Localization.MESSAGE_SENT));
+
+  document.title = t(Titles.RESET);
 
   useEffect(() => {
     if (loading) {
@@ -46,11 +46,11 @@ const ResetPass = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.h2}>{RESET_PASS}</h2>
+        <h2 className={styles.h2}>{t(Localization.RESET_PASS)}</h2>
       </div>
       <form onSubmit={(e) => reset(e)}>
         <InputAuth type={Inputs.EMAIL} value={email} onChange={(e) => setEmail(e.target.value)} />
-        <button className={styles.button}>{SEND_RESET}</button>
+        <button className={styles.button}>{t(Localization.SEND_RESET)}</button>
       </form>
       <ToastContainer />
     </div>

@@ -1,5 +1,6 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { auth, logout } from '../../firebase/firebase';
 
@@ -8,14 +9,25 @@ import styles from './Header.module.scss';
 import { Paths } from '../../enums/Paths';
 import { UINames } from '../../enums/UINames';
 import { Inputs } from '../../enums/Inputs';
+import { Localization } from '../../enums/Localization';
 
 export const Header = () => {
-  const TO_MAIN = 'Go to Main Page';
   const RLX = 'rlx';
   const RU = 'RU';
   const EN = 'EN';
 
+  const { t, i18n } = useTranslation();
+
   const [user] = useAuthState(auth);
+
+  const handleChangeLng = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let lng = 'en';
+    if (e.target.checked) {
+      lng = 'ru';
+    }
+    i18n.changeLanguage(lng);
+    localStorage.setItem('lng', lng);
+  };
 
   return (
     <header className={styles.header}>
@@ -27,19 +39,19 @@ export const Header = () => {
           {user ? (
             <>
               <NavLink className={styles.link} to={Paths.GRAPH}>
-                {TO_MAIN}
+                {t(Localization.TO_MAIN)}
               </NavLink>
               <button className={styles.logout} onClick={logout}>
-                {UINames.LOGUOT}
+                {t(UINames.LOGUOT)}
               </button>
             </>
           ) : (
             <>
               <NavLink className={styles.link} to={Paths.LOGIN}>
-                {UINames.SIGN_IN}
+                {t(UINames.SIGN_IN)}
               </NavLink>
               <NavLink className={styles.link} to={Paths.REGISTER}>
-                {UINames.SIGN_UP}
+                {t(UINames.SIGN_UP)}
               </NavLink>
             </>
           )}
@@ -47,7 +59,11 @@ export const Header = () => {
           <div className={styles.langToggle}>
             {EN}
             <label className={styles.switch}>
-              <input type={Inputs.CHECKBOX} />
+              <input
+                checked={localStorage.getItem('lng') === 'ru'}
+                type={Inputs.CHECKBOX}
+                onChange={(e) => handleChangeLng(e)}
+              />
               <span className={`${styles.slider} ${styles.round}`}></span>
             </label>
             {RU}

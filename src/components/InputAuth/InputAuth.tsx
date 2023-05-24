@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './InputAuth.module.scss';
 
 import { Inputs } from '../../enums/Inputs';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   type: 'email' | 'password';
@@ -11,7 +12,9 @@ type Props = {
 };
 
 export const InputAuth = ({ type, value, onChange }: Props) => {
+  const { t } = useTranslation();
   const PATTERN = '(?=.*?[0-9])(?=.*?[A-Za-z])(?=.*[^0-9A-Za-z]).+';
+  const placeholder = t(type);
 
   let passPattern = undefined;
   if (type === Inputs.PASS) {
@@ -27,7 +30,7 @@ export const InputAuth = ({ type, value, onChange }: Props) => {
       className={styles.input}
       value={value}
       onChange={onChange}
-      placeholder={`type ${type}`}
+      placeholder={placeholder}
     />
   );
 };

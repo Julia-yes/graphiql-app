@@ -10,7 +10,8 @@
 }
 
 .wrapper {
-  width: max(300px, 60%);
+  max-width: 1024px;
+  padding: 0 1rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -39,7 +40,7 @@
   background-color: unset;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: inherit;
 }
 
 .logoLink {
@@ -112,6 +113,9 @@ input:checked + .slider:before {
 
 @media (max-width: 360px) {
   .menu {
-    gap: 1rem;
+    gap: 0.875rem;
+    font-size: 14px;
+    justify-content: space-between;
+    width: 100%;
   }
 }

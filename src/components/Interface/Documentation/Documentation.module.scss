@@ -118,3 +118,21 @@
   opacity: 0.7;
   color: black;
 }
+
+@media (max-width: 1024px) {
+  .documentation {
+    width: 100%;
+    top: -50%;
+    opacity: 0;
+    height: 0;
+    margin-left: 0;
+    pointer-events: none;
+  }
+  .documentation_showed {
+    height: 100%;
+    top: 0;
+    opacity: 1;
+    margin-bottom: 1rem;
+    pointer-events: initial;
+  }
+}
