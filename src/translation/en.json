@@ -25,5 +25,21 @@
   "dev3 desc": "Really solid",
   "school desc": "RS-School-React is a really nice place to studying",
   "Welcome": "Welcome",
-  "GraphQL App": "GraphQL App"
+  "GraphQL App": "GraphQL App",
+  "Request": "Request",
+  "Response": "Response",
+  "Response text": "Make your request",
+  "Variables": "Variables",
+  "Headers": "Headers",
+  "Default option": "Choose header name",
+  "value": "value",
+  "Documentation advice": "Select a type from the documentation",
+  "Invalid request": "Invalid request",
+  "Problem with staples": "Problem with staples",
+  "Empty request": "Request is empty, write something",
+  "Required query word": "Your query must start with word `query`",
+  "Long name": "Too long name of request",
+  "Query error": "Error in your query",
+  "Object problem": "Variables object must be in `{}`",
+  "Variables problem": "Problem with variables: property keys must be doublequoted or invalid format of the variable value"
 }

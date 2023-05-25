@@ -32,3 +32,9 @@
     background-color: $gray-light;
   }
 }
+
+@media (max-width: 1024px) {
+  .settings {
+    border-color: transparent
+  }
+}

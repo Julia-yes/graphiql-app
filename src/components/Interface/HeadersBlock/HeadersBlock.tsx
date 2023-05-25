@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import styles from './HeadersBlock.module.scss';
 import { DataContext } from '../../../context/Context';
 import { Button } from '../../Button/Button';
+import { useTranslation } from 'react-i18next';
+import { Localization } from '../../../enums/Localization';
 
 export const HeadersBlock = () => {
   const { headers, setNewHeaders, headersKey, setNewHeadersKey } = useContext(DataContext);
+  const { t } = useTranslation();
 
   function ChangeHeaders(e: React.FormEvent<HTMLInputElement>): void {
     setNewHeaders(e.currentTarget.value);
@@ -23,7 +26,7 @@ export const HeadersBlock = () => {
     <div className={styles.wrapper}>
       <div className={styles.headersArea}>
         <select value={headersKey} onChange={(e) => ChangedHeaderKey(e)}>
-          <option value={'default'}>Choose header name</option>
+          <option value={'default'}>{t(Localization.DEFAULT_OPTION)}</option>
           <option value={'Autorization'}>Autorization</option>
           <option value={'Accept-Language'}>Accept-Language</option>
           <option value={'Cache-Control'}>Cache-Control</option>
@@ -31,7 +34,7 @@ export const HeadersBlock = () => {
         <input
           value={headers}
           onInput={(e) => ChangeHeaders(e)}
-          placeholder='value'
+          placeholder={t(Localization.VALUE)!}
           className={styles.input}
         ></input>
       </div>

@@ -1,11 +1,11 @@
+import { Links } from '../enums/Links';
+
 export const LoadSource = async (
   query: string,
   variables: string,
   headers: string,
   headersKey: string
 ) => {
-  const apiUrl = `https://rickandmortyapi.com/graphql`;
-
   const requestHeaders: HeadersInit = {
     'Content-type': 'application/json',
   };
@@ -15,7 +15,7 @@ export const LoadSource = async (
     requestHeaders[headersKey] = headers;
   }
 
-  const response = await fetch(apiUrl, {
+  const response = await fetch(Links.API_URL, {
     method: 'POST',
     headers: requestHeaders,
     body: JSON.stringify({ query, variables }),

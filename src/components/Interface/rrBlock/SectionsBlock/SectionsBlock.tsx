@@ -6,18 +6,21 @@ import { Sections } from '../../../../enums/Sections';
 import { Button } from '../../../Button/Button';
 import { checkRows } from '../../../../utils/CheckRows';
 import { HeadersBlock } from '../../HeadersBlock/HeadersBlock';
+import { useTranslation } from 'react-i18next';
 
 export const SectionsBlock = () => {
   const { section, changeSection, sectionState, changeSectionState, variables } =
     useContext(DataContext);
 
-  const SetSection = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    changeSection(e.currentTarget.innerHTML);
+  const SetSection = () => {
+    changeSection(section === Sections.VARIABLES ? Sections.HEADERS : Sections.VARIABLES);
   };
 
   const ChangeSectionView = () => {
     changeSectionState(!sectionState);
   };
+
+  const { t } = useTranslation();
 
   return (
     <section className={styles.wrapper}>
@@ -25,19 +28,15 @@ export const SectionsBlock = () => {
         <div className={styles.buttons}>
           <button
             className={section === Sections.VARIABLES ? styles.button_active : styles.button}
-            onClick={(e) => {
-              SetSection(e);
-            }}
+            onClick={SetSection}
           >
-            {Sections.VARIABLES}
+            {t(Sections.VARIABLES)}
           </button>
           <button
             className={section !== Sections.VARIABLES ? styles.button_active : styles.button}
-            onClick={(e) => {
-              SetSection(e);
-            }}
+            onClick={SetSection}
           >
-            {Sections.HEADERS}
+            {t(Sections.HEADERS)}
           </button>
         </div>
         <Button icon={sectionState ? 'expand_less' : 'expand_more'} callback={ChangeSectionView} />

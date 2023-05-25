@@ -25,5 +25,21 @@
   "dev3 desc": "Действительно прочный",
   "school desc": "RS-School-React - очень хорошее место для учебы",
   "Welcome": "Добро пожаловать",
-  "GraphQL App": "GraphQL App"
+  "GraphQL App": "GraphQL App",
+  "Request": "Запрос",
+  "Response": "Ответ",
+  "Response text": "Отправьте свой запрос",
+  "Variables": "Переменные",
+  "Headers": "Заголовки",
+  "Default option": "Выберите имя заголовка",
+  "value": "значение",
+  "Documentation advice": "Выберите тип из документации",
+  "Invalid request": "Недопустимый запрос",
+  "Problem with staples": "Проблема со скобами",
+  "Empty request": "Запрос пуст, напишите что-нибудь",
+  "Required query word": "Your query must start with word `query`",
+  "Long name": "Слишком длинное название запроса",
+  "Query error": "Ошибка в вашем запросе",
+  "Object problem": "Переменные объекта должны находиться в `{}`",
+  "Variables problem": "Проблема с переменными: ключи свойств должны быть заключены в двойные кавычки или недопустимый формат значения переменной"
 }
