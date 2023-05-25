@@ -13,8 +13,7 @@ import DocType from '../../../types/DocType';
 import DocField from '../../../types/DocField';
 import styles from './Documentation.module.scss';
 import { Localization } from '../../../enums/Localization';
-
-const schemaUrl = 'https://rickandmortyapi.com/graphql';
+import { Links } from '../../../enums/Links';
 
 type DocProps = {
   isDocShowed: boolean;
@@ -31,7 +30,7 @@ export const Documentation = ({ isDocShowed }: DocProps) => {
     fetchSchema();
 
     function fetchSchema() {
-      fetch(schemaUrl, {
+      fetch(Links.SCHEMA_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: getIntrospectionQuery() }),

@@ -3,7 +3,7 @@
 .documentation {
   width: 25%;
   position: relative;
-  margin-left: -25%;
+  margin-left: -27%;
   color: $blue-dark;
   display: flex;
   flex-direction: column;
@@ -127,6 +127,7 @@
     height: 0;
     margin-left: 0;
     pointer-events: none;
+    padding-left: 10px;
   }
   .documentation_showed {
     height: 100%;
