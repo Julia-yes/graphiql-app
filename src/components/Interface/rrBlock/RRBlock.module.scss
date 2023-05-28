@@ -1,0 +1,50 @@
+@import '../../../variables.scss';
+
+.wrapper {
+  border-radius: 10px;
+  background-color: white;
+  width: 50%;
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleArea {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  height: 60px;
+  flex-grow: 0;
+}
+
+.title {
+  color: $blue-dark;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.defaultText {
+  text-align: center;
+  color: $blue-dark;
+  font-size: 20px;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    width: 100%;
+  }
+  .main {
+    height: 400px;
+  }
+}

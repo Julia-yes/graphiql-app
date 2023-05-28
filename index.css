@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Jost, 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+textarea,
+input,
+select {
+  outline: none;
+}

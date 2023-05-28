@@ -1,0 +1,22 @@
+@import '../../../variables.scss';
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.textarea {
+  width: 100%;
+  height: fit-content;
+  border: none;
+  box-sizing: border-box;
+  color: $blue-dark;
+  height: 100%;
+  resize: none;
+  font-size: 14px;
+
+  &_error {
+    @extend .textarea;
+    color: $red;
+  }
+}

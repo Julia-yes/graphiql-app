@@ -1,0 +1,38 @@
+@import '../../variables.scss';
+
+.footer {
+  color: $white;
+  background-color: $blue-dark;
+  padding: 10px;
+  z-index: 2;
+}
+
+.wrapper {
+  max-width: 1024px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rsLogo {
+  height: 1.5rem;
+  filter: invert(1);
+  display: block;
+}
+
+.credits {
+  display: flex;
+  gap: 1rem;
+}
+
+.credits a {
+  color: $white;
+  transition: 0.2s;
+  &:hover {
+    color: $gray-a;
+  }
+}
