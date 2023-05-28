@@ -12,8 +12,12 @@ export const SectionsBlock = () => {
   const { section, changeSection, sectionState, changeSectionState, variables } =
     useContext(DataContext);
 
-  const SetSection = () => {
-    changeSection(section === Sections.VARIABLES ? Sections.HEADERS : Sections.VARIABLES);
+  const SetSection = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (e.currentTarget.innerHTML === 'Variables' || e.currentTarget.innerHTML === 'Переменные') {
+      changeSection(Sections.VARIABLES);
+    } else {
+      changeSection(Sections.HEADERS);
+    }
   };
 
   const ChangeSectionView = () => {
@@ -28,13 +32,13 @@ export const SectionsBlock = () => {
         <div className={styles.buttons}>
           <button
             className={section === Sections.VARIABLES ? styles.button_active : styles.button}
-            onClick={SetSection}
+            onClick={(e) => SetSection(e)}
           >
             {t(Sections.VARIABLES)}
           </button>
           <button
             className={section !== Sections.VARIABLES ? styles.button_active : styles.button}
-            onClick={SetSection}
+            onClick={(e) => SetSection(e)}
           >
             {t(Sections.HEADERS)}
           </button>
